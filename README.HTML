@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Zephyr</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="Author" content="Czigler Ferenc" />
+<meta name="Copyright" content="(C) Copyright Czigler Ferenc" />
+<link rel="stylesheet" href="u87.css" type="text/css" />
+<!--<link rel="icon" href="favicon.ico" type="image/x-icon" />-->
+<style>
+
+html, body { font-size: 15px;  }
+body { max-width: 800px; margin: 0 auto; }
+
+</style>
+</head>
+<body>
+
+<h1 class="center">Zephyr</h1>
+
+<p>Collection of the ECMAScript abstract methods as standalone Javascript functions and a library with zero dependencies. </p>
+
+<p>This is still in alpha version.</p>
+
+<hr/>
+
+<h2>Zephyr Alpha versions</h2>
+
+<table class="table-responsive-sm table-striped">
+  <tr>
+    <td><b>Version</b></td>
+    <td><b>Changes</b></td>
+  <tr>
+  <tr>
+    <td>0.0.1 - 0.09</td>
+    <td>collect functions</td>
+  <tr>
+  <tr>
+    <td>0.1.0</td>
+    <td>added the min file and first public version</td>
+  <tr>
+  <tr>
+    <td>0.1.1</td>
+    <td>added the esm file</td>
+  <tr>
+  <tr>
+    <td>0.1.2</td>
+    <td>added the documentation</td>
+  <tr>
+</table>
+
+
+<hr/>
+
+<h2>API documentation</h2>
+
+<table class="table-responsive-sm table-striped">
+  <tr>
+    <td><b>Function</b></td>
+    <td><b>262</b></td>
+    <td><b>TC39</b></td>
+    <td><b>Status</b></td>
+  </tr>
+  <tr>
+    <td>VERSION;</td>
+    <td></td>
+    <td></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>noConflict();</td>
+    <td></td>
+    <td></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>Type();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-ecmascript-language-types">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-ecmascript-data-types-and-values">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>StringIndexOf();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-stringindexof">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-stringindexof">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>StringLastIndexOf();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-stringlastindexof">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsAccessorDescriptor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isaccessordescriptor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-isaccessordescriptor">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>IsDataDescriptor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isdatadescriptor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-isdatadescriptor">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>IsGenericDescriptor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isgenericdescriptor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-isdatadescriptor">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>FromPropertyDescriptor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-frompropertydescriptor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-frompropertydescriptor">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>ToPropertyDescriptor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-topropertydescriptor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-topropertydescriptor">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>CompletePropertyDescriptor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-completepropertydescriptor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-completepropertydescriptor">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>ToPrimitive();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-toprimitive">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-toprimitive">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>OrdinaryToPrimitive();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-ordinarytoprimitive">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-ordinarytoprimitive">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToBoolean();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-toboolean">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-toboolean">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToNumeric();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-tonumeric">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-tonumeric">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToNumber();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-tonumber">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-tonumber">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>StringToNumber();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-tonumber-applied-to-the-string-type">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-stringtonumber">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToIntegerOrInfinity();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-tointegerorinfinity">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-tointegerorinfinity">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToInt32();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-toint32">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-toint32">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToUint32();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-touint32">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-touint32">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToInt16();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-toint16">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-toint16">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToUint16();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-touint16">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-touint16">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToInt8();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-toint8">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-toint8">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToUint8();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-touint8">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-touint8">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToUint8Clamp();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-touint8clamp">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-touint8clamp">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToBigInt();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-tobigint">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-tobigint">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>StringToBigInt();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-stringtobigint">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-stringtobigint">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToBigInt64();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-tobigint64">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-tobigint64">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToBigUint64();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-tobiguint64">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-tobiguint64">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToString();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-tostring">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-tostring">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToObject();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-toobject">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-toobject">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToPropertyKey();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-topropertykey">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-topropertykey">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToLength();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-tolength">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-tolength">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CanonicalNumericIndexString();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-canonicalnumericindexstring">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-canonicalnumericindexstring">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>RequireObjectCoercible();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-requireobjectcoercible">Link</a></td>
+    <td></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ToIndex();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-toindex">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-toindex">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsArray();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isarray">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-isarray">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsCallable();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-iscallable">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iscallable">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsConstructor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isconstructor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-isconstructor">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsExtensible();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isextensible-o">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-isextensible-o">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsIntegralNumber();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isintegralnumber">Link</a></td>
+    <td></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsRegExp();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isregexp">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-isregexp">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsPropertyKey();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-ispropertykey">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsStringWellFormedUnicode();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isstringwellformedunicode">Link</a></td>
+    <td></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>SameType();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-sametype">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>SameValue();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-samevalue">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-samevalue">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>SameValueZero();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-samevaluezero">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-samevaluezero">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>SameValueNonNumber();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-samevaluenonnumber">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-samevaluenonnumber">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsLessThan();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-islessthan">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-islessthan">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsLooselyEqual();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-islooselyequal">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-islooselyequal">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsStrictlyEqual();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isstrictlyequal">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-isstrictlyequal">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>MakeBasicObject();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-operations-on-objects">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-makebasicobject">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>Get();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-get-o-p">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-get-o-p">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>GetV();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-getv">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-getv">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>Set();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-set-o-p-v-throw">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-set-o-p-v-throw">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CreateDataProperty();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createdataproperty">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-createdataproperty">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CreateDataPropertyOrThrow();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createdatapropertyorthrow">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-createdatapropertyorthrow">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CreateNonEnumerableDataPropertyOrThrow();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createnonenumerabledatapropertyorthrow">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-createnonenumerabledatapropertyorthrow">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>DefinePropertyOrThrow();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-definepropertyorthrow">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-definepropertyorthrow">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>DeletePropertyOrThrow();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-deletepropertyorthrow">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-definepropertyorthrow">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>GetMethod();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-getmethod">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-getmethod">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>HasProperty();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-hasproperty">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-hasproperty">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>HasOwnProperty();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-hasownproperty">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-hasownproperty">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>Call();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-call">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-call">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>Construct();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-construct">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-construct">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>SetIntegrityLevel();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-setintegritylevel">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-setintegritylevel">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>TestIntegrityLevel();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-testintegritylevel">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-testintegritylevel">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CreateArrayFromList();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createarrayfromlist">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createarrayfromlist">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>LengthOfArrayLike();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-lengthofarraylike">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-lengthofarraylike">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CreateListFromArrayLike();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createlistfromarraylike">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createlistfromarraylike">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>Invoke();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-invoke">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-invoke">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>OrdinaryHasInstance();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-ordinaryhasinstance">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-ordinaryhasinstance">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>SpeciesConstructor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-speciesconstructor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-speciesconstructor">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>EnumerableOwnProperties();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-enumerableownproperties">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-enumerableownproperties">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>GetFunctionRealm();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-getfunctionrealm">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getfunctionrealm">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>CopyDataProperties();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-copydataproperties">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-copydataproperties">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>PrivateElementFind();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-privateelementfind">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-privateelementfind">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>PrivateFieldAdd();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-privatefieldadd">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-privatefieldadd">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>PrivateMethodOrAccessorAdd();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-privatemethodoraccessoradd">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-privatemethodoraccessoradd">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>HostEnsureCanAddPrivateElement();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-hostensurecanaddprivateelement">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-hostensurecanaddprivateelement">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>PrivateGet();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-privateget">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-privateget">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>PrivateSet();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-privateset">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-privateset">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>DefineField();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-definefield">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-definefield">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>InitializeInstanceElements();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-initializeinstanceelements">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-initializeinstanceelements">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>AddValueToKeyedGroup();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-add-value-to-keyed-group">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-add-value-to-keyed-group">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>GroupBy();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-groupby">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-groupby">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>SetterThatIgnoresPrototypeProperties();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-SetterThatIgnoresPrototypeProperties">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>GetIteratorDirect();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratordirect">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>GetIteratorFromMethod();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-getiteratorfrommethod">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratorfrommethod">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>GetIterator();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-getiterator">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiterator">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>GetIteratorFlattenable();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratorflattenable">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>IteratorNext();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-iteratornext">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratornext">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>IteratorComplete();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-iteratorcomplete">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorcomplete">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IteratorValue();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-iteratorvalue">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorvalue">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IteratorStep();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-iteratorstep">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstep">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>IteratorStepValue();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-iteratorstepvalue">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstepvalue">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>IteratorClose();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-iteratorclose">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorclose">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>IfAbruptCloseIterator();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-ifabruptcloseiterator">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-ifabruptcloseiterator">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>AsyncIteratorClose();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-asynciteratorclose">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-asynciteratorclose">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>CreateIteratorResultObject();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createiterresultobject">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createiterresultobject">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CreateListIteratorRecord();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createlistiteratorRecord">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createlistiteratorRecord">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>IteratorToList();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-iteratortolist">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratortolist">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>OrdinaryObjectCreate();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-ordinaryobjectcreate">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-ordinaryobjectcreate">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>OrdinaryCreateFromConstructor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-ordinarycreatefromconstructor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-ordinarycreatefromconstructor">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>GetPrototypeFromConstructor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-getprototypefromconstructor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-getprototypefromconstructor">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>RequireInternalSlot();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-requireinternalslot">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-requireinternalslot">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>OrdinaryFunctionCreate();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-ordinaryfunctioncreate">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-ordinaryfunctioncreate">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>AddRestrictedFunctionProperties();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-addrestrictedfunctionproperties">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-addrestrictedfunctionproperties">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>MakeConstructor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-makeconstructor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-makeconstructor">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>MakeClassConstructor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-makeclassconstructor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-makeclassconstructor">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>MakeMethod();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-makemethod">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-makemethod">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>DefineMethodProperty();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-definemethodproperty">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-definemethodproperty">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>SetFunctionName();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-setfunctionname">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-setfunctionname">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>SetFunctionLength();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-setfunctionlength">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-setfunctionlength">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>FunctionDeclarationInstantiation();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-functiondeclarationinstantiation">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-functiondeclarationinstantiation">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>BuiltinCallOrConstruct();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-builtincallorconstruct">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-builtincallorconstruct">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>CreateBuiltinFunction();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createbuiltinfunction">link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-createbuiltinfunction">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>BoundFunctionCreate();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-boundfunctioncreate">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-boundfunctioncreate">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>ArrayCreate();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-arraycreate">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-arraycreate">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ArraySpeciesCreate();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-arrayspeciescreate">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-arrayspeciescreate">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ArraySetLength();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-arraysetlength">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-arraysetlength">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>StringCreate();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-stringcreate">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-stringcreate">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>StringGetOwnProperty();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-stringgetownproperty">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-stringgetownproperty">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CreateUnmappedArgumentsObject();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createunmappedargumentsobject">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-createunmappedargumentsobject">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>CreateMappedArgumentsObject();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createmappedargumentsobject">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-createunmappedargumentsobject">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>MakeTypedArrayWithBufferWitnessRecord();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-maketypedarraywithbufferwitnessrecord">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-maketypedarraywithbufferwitnessrecord">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>TypedArrayCreate();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-typedarraycreate">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-typedarraycreate">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>TypedArrayByteLength();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-typedarraybytelength">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-typedarraybytelength">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>TypedArrayLength();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-typedarraylength">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-typedarraylength">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsTypedArrayOutOfBounds();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-istypedarrayoutofbounds">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-istypedarrayoutofbounds">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>IsTypedArrayFixedLength();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-istypedarrayfixedlength">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>IsValidIntegerIndex();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isvalidintegerindex">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-isvalidintegerindex">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>TypedArrayGetElement();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-typedarraygetelement">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-typedarraygetelement">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>TypedArraySetElement();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-typedarraysetelement">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-typedarraysetelement">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsArrayBufferViewOutOfBounds();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-isarraybufferviewoutofbounds">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-isarraybufferviewoutofbounds">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>ModuleNamespaceCreate();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-modulenamespacecreate">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-modulenamespacecreate">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>SetImmutablePrototype();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-set-immutable-prototype">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-set-immutable-prototype">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ValidateNonRevokedProxy();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-validatenonrevokedproxy">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-validatenonrevokedproxy">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ProxyCreate();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-proxycreate">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-proxycreate">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>UTF16EncodeCodePoint();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-utf16encodecodepoint">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html#sec-utf16encodecodepoint">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CodePointsToString();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-codepointstostring">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html#sec-codepointstostring">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>UTF16SurrogatePairToCodePoint();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-utf16decodesurrogatepair">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html#sec-utf16decodesurrogatepair">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CodePointAt();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-codepointat">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html#sec-codepointat">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>StringToCodePoints();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-stringtocodepoints">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html#sec-stringtocodepoints">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ParseText();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-parsetext">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html#sec-parsetext">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>GetTemplateObject();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-gettemplateobject">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-gettemplateobject">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>KeyForSymbol();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-keyforsymbol">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-keyforsymbol">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>InstallErrorCause();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-installerrorcause">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-abstract-operations-for-error-objects">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>NumberToBigInt();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-numbertobigint">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-numbertobigint">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>TrimString();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-trimstring">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/text-processing.html#sec-trimstring">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CreateArrayIterator();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createarrayiterator">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-createarrayiterator">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>FindViaPredicate();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-findviapredicate">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-findviapredicate">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>FlattenIntoArray();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-flattenintoarray">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-flattenintoarray">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>SortIndexedProperties();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-sortindexedproperties">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-properties-of-the-array-prototype-object">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>CompareArrayElements();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-comparearrayelements">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-properties-of-the-array-prototype-object">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>TypedArrayElementSize();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-typedarrayelementsize">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-abstract-operations-for-typedarray-objects">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>TypedArrayElementType();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-typedarrayelementtype">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-typedarrayelementtype">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>AddEntriesFromIterable();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-add-entries-from-iterable">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/keyed-collections.html#sec-add-entries-from-iterable">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CompareTypedArrayElements();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-comparetypedarrayelements">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-typedarrayelementtype">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CreateMapIterator();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createmapiterator">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/keyed-collections.html#sec-createmapiterator">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CreateSetIterator();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createsetiterator">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/keyed-collections.html#sec-createsetiterator">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CanonicalizeKeyedCollectionKey();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/keyed-collections.html#sec-canonicalizekeyedcollectionkey">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>CreateAsyncFromSyncIterator();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createasyncfromsynciterator">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-createasyncfromsynciterator">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>CreateHTML();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createhtml">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html#sec-createhtml">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+</table>
+
+<hr/>
+
+<h2 id="license">License</h2>
+
+<div>
+  <p><a href="https://opensource.org/licenses/MIT" target="_blank">https://opensource.org/licenses/MIT</a></p>
+  <h3>MIT License</h3>
+  <p><b>SPDX short identifier: MIT</b></p>
+  <p>Copyright (c) 2025 Ferenc Czigler</p>
+  <p>Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:</p>
+  <p>The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.</p>
+  <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.</p>
+</div>
+
+<hr/>
+
+<p class="center"><small>© Copyright 2025 Ferenc Czigler</small></p>
+
+</body>
+</html>

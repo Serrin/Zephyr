@@ -696,7 +696,6 @@ https://262.ecma-international.org/#sec-definepropertyorthrow
 7.3.8 DefinePropertyOrThrow ( O, P, desc )
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-definepropertyorthrow
 7.3.8 DefinePropertyOrThrow ( O, P, desc )
-TODO: desc -> defineproperty object
 */
 function DefinePropertyOrThrow (O, P, desc) {
   Object.defineProperty(O, P, desc);
@@ -1638,7 +1637,7 @@ const StringGetOwnProperty = (S, P) => S[P];
 
 
 /*
-https://262.ecma-international.org/#sec-module-namespace-exotic-objects
+https://262.ecma-international.org/#sec-createunmappedargumentsobject
 10.4.4.6 CreateUnmappedArgumentsObject ( argumentsList )
 https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-createunmappedargumentsobject
 10.4.4.6 CreateUnmappedArgumentsObject ( argumentsList )
@@ -1648,9 +1647,9 @@ function CreateUnmappedArgumentsObject () { return arguments; }
 
 
 /*
-https://262.ecma-international.org/#sec-createunmappedargumentsobject
+https://262.ecma-international.org/#sec-createmappedargumentsobject
 10.4.4.7 CreateMappedArgumentsObject ( func, formals, argumentsList, env )
-https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-createunmappedargumentsobject
+https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-createmappedargumentsobject
 10.4.4.7 CreateMappedArgumentsObject ( func, formals, argumentsList, env )
 TODO
 */
@@ -1720,7 +1719,7 @@ TODO
 
 /*
 https://262.ecma-international.org/
-none
+NONE
 https://tc39.es/ecma262/#sec-istypedarrayfixedlength
 10.4.5.15 IsTypedArrayFixedLength ( O )
 TODO
