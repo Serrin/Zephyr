@@ -1,0 +1,55 @@
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0 auto;
+  padding: 5px;
+  width: 100%;
+  /*max-width: 1500px;*/
+  font-family: sans-serif;
+}
+
+h1, h2 { text-align: center; }
+
+.resultElement { font-family: monospace; }
+
+th,
+td {
+  border: 1px solid rgb(160 160 160);
+  padding: 8px 10px;
+}
+
+th[scope="col"] {
+  background-color: #444444; /* 505050*/
+  color: #fff;
+}
+
+th[scope="row"] {
+  background-color: #dddddd; /* d6ecd4 */
+}
+
+td {
+  text-align: center;
+}
+
+tr:nth-of-type(even) {
+  background-color: #eee;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(140 140 140);
+  /*font-family: sans-serif;*/
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+caption {
+  caption-side: bottom;
+  padding: 10px;
+}
+
+#textarea1 { width: 100%; }
