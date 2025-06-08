@@ -26,7 +26,7 @@ VERSION;|||__DONE__
 noConflict();|||__DONE__
 Type();|[Link](https://262.ecma-international.org/#sec-ecmascript-language-types)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-ecmascript-data-types-and-values)|__DONE__
 StringIndexOf();|[Link](https://262.ecma-international.org/#sec-stringindexof)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-stringindexof)|__DONE__
-StringLastIndexOf();|(https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-stringlastindexof)||__DONE__
+StringLastIndexOf();|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-stringlastindexof)||__DONE__
 IsAccessorDescriptor();|[Link](https://262.ecma-international.org/#sec-isaccessordescriptor)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-isaccessordescriptor)|TODO
 IsDataDescriptor();|[Link](https://262.ecma-international.org/#sec-isdatadescriptor)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-isdatadescriptor)|TODO
 IsGenericDescriptor();|[Link](https://262.ecma-international.org/#sec-isgenericdescriptor)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-isdatadescriptor)|TODO
