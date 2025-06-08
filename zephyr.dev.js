@@ -1301,23 +1301,6 @@ const IteratorToList = (iteratorRecord) => [...iteratorRecord];
 
 
 /*
-https://262.ecma-international.org/#sec-arraycreate
-10.4.2.2 ArrayCreate ( length [ , proto ] )
-https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-arraycreate
-10.4.2.2 ArrayCreate ( length [ , proto ] )
-Note: Recreated without the proto argument.
-*/
-function ArrayCreate (length = 0) {
-  length = Number(length);
-  if (1 / length === -Infinity) { length = 0; }
-  if (length > (Math.pow(2, 32) - 1)) {
-    throw new RangeError("Invalid array length: " + length);
-  }
-  return Array(length);
-}
-
-
-/*
 https://262.ecma-international.org/#sec-ordinaryobjectcreate
 10.1.12 OrdinaryObjectCreate ( proto [ , additionalInternalSlotsList ] )
 https://tc39.es/ecma262/#sec-ordinaryobjectcreate
@@ -2378,7 +2361,6 @@ const zephyr = {
   CreateIteratorResultObject,
   CreateListIteratorRecord,
   IteratorToList,
-  ArrayCreate,
   OrdinaryObjectCreate,
   OrdinaryCreateFromConstructor,
   GetPrototypeFromConstructor,

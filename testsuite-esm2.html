@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<title>TestSuite and TestCase results</title>
+
+<link rel="stylesheet" href="testsuite.css" type="text/css" />
+<script type="module">
+import * as zephyr from "./zephyr.esm.js";
+window.zephyr = zephyr;
+window.ES = window.zephyr;
+</script>
+<script src="testsuite.js"></script>
+<script src="testcases.js"></script>
+
+<h1>TestSuite and TestCase results</h1>
+
+<textarea id="textarea1" rows="10" cols="10" readonly>
+
+</textarea>
+
+<div id="resultElement1" class="resultElement"></div>
+<div id="resultElement2" class="resultElement"></div>
+<div id="resultElement3" class="resultElement"></div>
+<div id="resultElement4" class="resultElement"></div>
+<div id="resultElement5" class="resultElement"></div>
+<div id="resultElement6" class="resultElement"></div>
+<div id="resultElement7" class="resultElement"></div>
+
+<script>
+
+const stringFormat = (v) => ((typeof v === "string") ? "\"" + v + "\"" : v);
+
+function displayResult (element, object, caption) {
+  var resultStr = `
+    <h2>${caption}</h2>
+    <table>
+      <caption>${caption}</caption>
+      <tr>
+        <th scope="col">name</th>
+        <th scope="col">callback</th>
+        <th scope="col">expectedvalue</th>
+        <th scope="col">resultValue</th>
+        <th scope="col">success</th>
+        <th scope="col">errorObject</th>
+        <th scope="col">hasError</th>
+      </tr>
+  `;
+  for (let item of object) {
+    resultStr += `
+      <tr>
+        <th scope="row">${item.name}</th>
+        <td>${stringFormat(item.callback)}</td>
+        <td>${stringFormat(item.expectedvalue)}</td>
+        <td>${stringFormat(item.resultValue)}</td>
+        <td style="background-color: ${item.success ? "lightgreen" : "lightsalmon"};">${item.success}</td>
+        <td>${stringFormat(item.errorObject)}</td>
+        <td>${item.hasError}</td>
+      </tr>
+    `;
+  }
+  resultStr += "</table>";
+  element.innerHTML = resultStr;  
+}
+
+setTimeout(() => {
+  defaultTestSuite.run()
+  document.querySelector("#textarea1").value = defaultTestSuite.getJSON();
+  displayResult(
+    document.querySelector("#resultElement1"),
+    defaultTestSuite.getFailedTestCases(),
+    "Failed testcases"
+  );
+  displayResult(
+    document.querySelector("#resultElement2"),
+    defaultTestSuite.getErrorFailedTestCases(),
+    "Failed Testcases with error object"
+  );
+  displayResult(
+    document.querySelector("#resultElement3"),
+    defaultTestSuite.getAllTestCases(),
+    "All testcases"
+  );
+  displayResult(
+    document.querySelector("#resultElement4"),
+    defaultTestSuite.getSuccessTestCases(),
+    "Success testcases"
+  );
+  displayResult(
+    document.querySelector("#resultElement5"),
+    defaultTestSuite.getErrorTestCases(),
+    "All testcases with error object"
+  );
+  displayResult(
+    document.querySelector("#resultElement6"),
+    defaultTestSuite.getErrorSuccessTestCases(),
+    "Success testcases with error object"
+  );
+}, 1000);
+
+
+</script>
