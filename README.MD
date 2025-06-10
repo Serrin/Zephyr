@@ -15,6 +15,7 @@ Version      | Changes
 0.1.0        | added the min file, first public version
 0.1.1        | added the esm file
 0.1.2        | added the documentation
+0.1.3        | fixes and new functions
 
 
 ## API documentation
@@ -111,18 +112,18 @@ GroupBy();|[Link](https://262.ecma-international.org/#sec-groupby)|[Link](https:
 SetterThatIgnoresPrototypeProperties();||[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-SetterThatIgnoresPrototypeProperties)|TODO
 GetIteratorDirect();||[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratordirect)|__DONE__
 GetIteratorFromMethod();|[Link](https://262.ecma-international.org/#sec-getiteratorfrommethod)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratorfrommethod)|__DONE__
-GetIterator();|[Link](https://262.ecma-international.org/#sec-getiterator)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiterator)|TODO
-GetIteratorFlattenable();||[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratorflattenable)|TODO
-IteratorNext();|[Link](https://262.ecma-international.org/#sec-iteratornext)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratornext)|TODO
+GetIterator();|[Link](https://262.ecma-international.org/#sec-getiterator)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiterator)|__DONE__
+GetIteratorFlattenable();||[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratorflattenable)|__DONE__
+IteratorNext();|[Link](https://262.ecma-international.org/#sec-iteratornext)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratornext)|__DONE__
 IteratorComplete();|[Link](https://262.ecma-international.org/#sec-iteratorcomplete)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorcomplete)|__DONE__
 IteratorValue();|[Link](https://262.ecma-international.org/#sec-iteratorvalue)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorvalue)|__DONE__
-IteratorStep();|[Link](https://262.ecma-international.org/#sec-iteratorstep)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstep)|TODO
-IteratorStepValue();|[Link](https://262.ecma-international.org/#sec-iteratorstepvalue)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstepvalue)|TODO
+IteratorStep();|[Link](https://262.ecma-international.org/#sec-iteratorstep)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstep)|__DONE__
+IteratorStepValue();|[Link](https://262.ecma-international.org/#sec-iteratorstepvalue)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstepvalue)|__DONE__
 IteratorClose();|[Link](https://262.ecma-international.org/#sec-iteratorclose)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorclose)|TODO
 IfAbruptCloseIterator();|[Link](https://262.ecma-international.org/#sec-ifabruptcloseiterator)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-ifabruptcloseiterator)|TODO
 AsyncIteratorClose();|[Link](https://262.ecma-international.org/#sec-asynciteratorclose)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-asynciteratorclose)|TODO
 CreateIteratorResultObject();|[Link](https://262.ecma-international.org/#sec-createiterresultobject)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createiterresultobject)|__DONE__
-CreateListIteratorRecord();|[Link](https://262.ecma-international.org/#sec-createlistiteratorRecord)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createlistiteratorRecord)|TODO
+CreateListIteratorRecord();|[Link](https://262.ecma-international.org/#sec-createlistiteratorRecord)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createlistiteratorRecord)|__DONE__
 IteratorToList();|[Link](https://262.ecma-international.org/#sec-iteratortolist)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratortolist)|__DONE__
 OrdinaryObjectCreate();|[Link](https://262.ecma-international.org/#sec-ordinaryobjectcreate)|[Link](https://tc39.es/ecma262/#sec-ordinaryobjectcreate)|__DONE__
 OrdinaryCreateFromConstructor();|[Link](https://262.ecma-international.org/#sec-ordinarycreatefromconstructor)|[Link](https://tc39.es/ecma262/#sec-ordinarycreatefromconstructor)|__DONE__
@@ -184,7 +185,8 @@ CompareTypedArrayElements();|[Link](https://262.ecma-international.org/#sec-comp
 CreateMapIterator();|[Link](https://262.ecma-international.org/#sec-createmapiterator)|[Link](https://tc39.es/ecma262/multipage/keyed-collections.html#sec-createmapiterator)|__DONE__
 CreateSetIterator();|[Link](https://262.ecma-international.org/#sec-createsetiterator)|[Link](https://tc39.es/ecma262/multipage/keyed-collections.html#sec-createsetiterator)|__DONE__
 CanonicalizeKeyedCollectionKey();||[Link](https://tc39.es/ecma262/multipage/keyed-collections.html#sec-canonicalizekeyedcollectionkey)|__DONE__
-CreateAsyncFromSyncIterator();|[Link](https://262.ecma-international.org/#sec-createasyncfromsynciterator)|[Link](https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-createasyncfromsynciterator)|TODO
+CreateAsyncFromSyncIterator();|[Link](https://262.ecma-international.org/#sec-createasyncfromsynciterator)|[Link](https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-createasyncfromsynciterator)|__DONE__
+AsyncFromSyncIteratorContinuation();|[Link](https://262.ecma-international.org/#sec-asyncfromsynciteratorcontinuation)|[Link](https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-asyncfromsynciteratorcontinuation)|TODO
 CreateHTML();|[Link](https://262.ecma-international.org/#sec-createhtml)|[Link](https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html#sec-createhtml)|__DONE__
 
 

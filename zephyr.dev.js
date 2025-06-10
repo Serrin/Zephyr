@@ -1,6 +1,6 @@
 /**
  * @name Zephyr
- * @version 0.1.0 dev
+ * @version 0.1.3 dev
  * @see https://github.com/Serrin/
  * @license MIT https://opensource.org/licenses/MIT
  */
@@ -1104,36 +1104,41 @@ https://262.ecma-international.org/#sec-getiterator
 7.4.3 GetIterator ( obj, kind )
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiterator
 7.4.4 GetIterator ( obj, kind )
-TODO
 */
-/*
 function GetIterator(obj, kind) {
-  function GetIteratorFromMethod (obj, method) {
-    let iterator = Reflect.apply(method, obj, []);
-    if (((iterator === null) ? "null" : (typeof iterator)) !== "object") {
-      throw new TypeError();
-    }
-    return {
-      "[[Iterator]]": iterator,
-      "[[NextMethod]]": iterator.next,
-      "[[Done]]": false
-    };
+  async function* createAsyncIterable(syncIterable) {
+    for (const item of syncIterable) { yield item; }
   }
-  if (kind === "ASYNC") {
-    var method = obj[Symbol.asyncIterator];
-    if (method === undefined) {
-      var syncMethod = obj[Symbol.iterator];
-      if (syncMethod === undefined) { throw new TypeError(); }
-      var syncIteratorRecord = GetIteratorFromMethod(obj, syncMethod);
-      return CreateAsyncFromSyncIterator(syncIteratorRecord); // TODO
+  let iterator;
+  if (kind === "ASYNC") { /* ASYNC */
+    if (obj[Symbol.asyncIterator] === undefined
+      && obj[Symbol.iterator] === undefined) {
+      throw new TypeError(
+        "GetIterator(); Error: " + obj + " is not sync/async iterable"
+      );
+    }    if (obj[Symbol.asyncIterator] !== undefined) {
+      iterator = obj[Symbol.asyncIterator]();
     }
-  } else {
-    var method = obj[Symbol.iterator];
+    if (obj[Symbol.asyncIterator] === undefined
+    && obj[Symbol.iterator] !== undefined) {
+      iterator = createAsyncIterable(obj);
+    }
+  } else { /* SYNC */
+    if (obj[Symbol.iterator] === undefined) {
+      throw new TypeError(
+        "GetIterator(); Error: " + obj + " is not sync iterable");
+    }
+    iterator = obj[Symbol.iterator]();
   }
-  if (method === undefined) { throw new TypeError(); }
-  return GetIteratorFromMethod(obj, method);
+  if (((iterator === null) ? "null" : (typeof iterator)) !== "object") {
+    throw new TypeError("GetIterator(); Error: iterator");
+  }
+  return {
+    "[[Iterator]]": iterator,
+    "[[NextMethod]]": iterator.next,
+    "[[Done]]": false
+  };
 }
-*/
 
 
 /*
@@ -1141,8 +1146,38 @@ https://262.ecma-international.org/
 NONE
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratorflattenable
 7.4.5 GetIteratorFlattenable ( obj, primitiveHandling )
-TODO
 */
+function GetIteratorFlattenable ( obj, primitiveHandling ) {
+  const Type = (O) => (O === null ? "null" : typeof O);
+  if (Type(obj) !== "object") {
+    if (primitiveHandling === "REJECT-PRIMITIVES") {
+      throw new TypeError(
+        "GetIteratorFlattenable(); TypeError: " + obj + " is not an object"
+      );
+    }
+    if (primitiveHandling === "ITERATE-STRING-PRIMITIVES"
+      && typeof obj !== "string") {
+      throw new TypeError(
+        "GetIteratorFlattenable(); TypeError: " + obj + " is not a string"
+      );
+    }
+  }
+  if (obj[Symbol.iterator] === undefined) {
+    var iterator = obj;
+  } else {
+    var iterator = obj[Symbol.iterator]();
+  }
+  if (Type(iterator) !== "object") {
+    throw new TypeError(
+      "GetIteratorFlattenable(); TypeError: " + iterator + " is not an object"
+    );
+  }
+  return {
+    "[[Iterator]]": iterator,
+    "[[NextMethod]]": iterator.next,
+    "[[Done]]": false
+  };
+}
 
 
 /*
@@ -1152,13 +1187,17 @@ https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratornext
 7.4.6 IteratorNext ( iteratorRecord [ , value ] )
 TODO
 */
-/*
 function IteratorNext(iteratorRecord, value) {
   const Type = (O) => (O === null ? "null" : typeof O);
+  if (Type(iteratorRecord) !== "object") {
+    throw new TypeError(
+      "IteratorNext(); TypeError: iteratorRecord is not an object"
+    );
+  }
   let result;
   if (value == null) {
     result = Reflect.apply(
-      iteratorRecord["[[NextMethod]]"], iteratorRecord["[[Iterator]]"]
+      iteratorRecord["[[NextMethod]]"], iteratorRecord["[[Iterator]]"], []
     );
   } else {
     result = Reflect.apply(
@@ -1167,11 +1206,10 @@ function IteratorNext(iteratorRecord, value) {
   }
   if (Type(result) !== "object") {
     iteratorRecord["[[Done]]"] = true;
-    throw new TypeError("IteratorNext(); error");
+    throw new TypeError("IteratorNext(); TypeError: result is not an object");
   }
   return result;
 }
-*/
 
 
 /*
@@ -1197,11 +1235,32 @@ https://262.ecma-international.org/#sec-iteratorstep
 7.4.7 IteratorStep ( iteratorRecord )
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstep
 7.4.9 IteratorStep ( iteratorRecord )
-TODO
 */
-/*
 function IteratorStep (iteratorRecord) {
-  var result = IteratorNext(iteratorRecord); // TODO
+  function IteratorNext(iteratorRecord, value) {
+    const Type = (O) => (O === null ? "null" : typeof O);
+    if (Type(iteratorRecord) !== "object") {
+      throw new TypeError(
+        "IteratorNext(); TypeError: iteratorRecord is not an object"
+      );
+    }
+    let result;
+    if (value == null) {
+      result = Reflect.apply(
+        iteratorRecord["[[NextMethod]]"], iteratorRecord["[[Iterator]]"], []
+      );
+    } else {
+      result = Reflect.apply(
+        iteratorRecord["[[NextMethod]]"], iteratorRecord["[[Iterator]]"], [value]
+      );
+    }
+    if (Type(result) !== "object") {
+      iteratorRecord["[[Done]]"] = true;
+      throw new TypeError("IteratorNext(); TypeError: result is not an object");
+    }
+    return result;
+  }
+  var result = IteratorNext(iteratorRecord);
   var done = Boolean(result["done"]);
   if (done) {
     iteratorRecord["[[Done]]"] = true;
@@ -1209,7 +1268,6 @@ function IteratorStep (iteratorRecord) {
   }
   return result;
 }
-*/
 
 
 /*
@@ -1217,8 +1275,50 @@ https://262.ecma-international.org/#sec-iteratorstepvalue
 7.4.8 IteratorStepValue ( iteratorRecord )
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstepvalue
 7.4.10 IteratorStepValue ( iteratorRecord )
-TODO
 */
+function IteratorStepValue(iteratorRecord) {
+  function IteratorStep (iteratorRecord) {
+    function IteratorNext(iteratorRecord, value) {
+      const Type = (O) => (O === null ? "null" : typeof O);
+      if (Type(iteratorRecord) !== "object") {
+        throw new TypeError(
+          "IteratorNext(); TypeError: iteratorRecord is not an object"
+        );
+      }
+      let result;
+      if (value == null) {
+        result = Reflect.apply(
+          iteratorRecord["[[NextMethod]]"], iteratorRecord["[[Iterator]]"], []
+        );
+      } else {
+        result = Reflect.apply(
+          iteratorRecord["[[NextMethod]]"], iteratorRecord["[[Iterator]]"], [value]
+        );
+      }
+      if (Type(result) !== "object") {
+        iteratorRecord["[[Done]]"] = true;
+        throw new TypeError("IteratorNext(); TypeError: result is not an object");
+      }
+      return result;
+    }
+    var result = IteratorNext(iteratorRecord);
+    var done = Boolean(result["done"]);
+    if (done) {
+      iteratorRecord["[[Done]]"] = true;
+      return done;
+    }
+    return result;
+  }
+  let result = IteratorStep(iteratorRecord);
+  if (result === true) { return true; }
+  try {
+    var value = result.value;
+  } catch (e) {
+    iteratorRecord["[[Done]]"] = true;
+    throw new TypeError("IteratorStepValue(); Error: " + e);
+  }
+  return value;
+}
 
 
 /*
@@ -1232,16 +1332,18 @@ TODO
 function IteratorClose(iteratorRecord, completion) {
   const Type = (O) => (O === null ? "null" : typeof O);
   if (Type(iteratorRecord["[[Iterator]]"]) !== "object") {
-    throw new Error(iteratorRecord["[[Iterator]]"] + "is not an object.");
+    throw new Error("IteratorClose(); Error: "
+      + iteratorRecord["[[Iterator]]"] + "is not an object."
+    );
   }
   let iterator = iteratorRecord["[[Iterator]]"];
-  let returnMethod = GetMethod(iterator, "return");
+  let returnMethod = iterator["return"];
   if (returnMethod === undefined) { return completion; }
   let innerResult;
   let innerException;
   try {
-    innerResult = Reflect.apply(returnMethod, iterator);
-  } catch (error) { innerException = error; }
+    innerResult = Reflect.apply(returnMethod, iterator, []);
+  } catch (e) { innerException = e; }
   if (completion) { return completion; }
   if (innerException) { throw innerException; }
   if (Type(innerResult) !== "object") {
@@ -1285,9 +1387,11 @@ https://262.ecma-international.org/#sec-createlistiteratorRecord
 7.4.13 CreateListIteratorRecord ( list )
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createlistiteratorRecord
 7.4.15 CreateListIteratorRecord ( list )
-TODO - not standard record
 */
-const CreateListIteratorRecord = (list) => Array.from(list).values();
+function CreateListIteratorRecord (list) {
+  let obj = Array.from(list).values();
+  return ({"[[Iterator]]": obj, "[[NextMethod]]": obj.next, "[[Done]]": false});
+}
 
 
 /*
@@ -1296,7 +1400,7 @@ https://262.ecma-international.org/#sec-iteratortolist
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratortolist
 7.4.16 IteratorToList ( iteratorRecord )
 */
-const IteratorToList = (iteratorRecord) => [...iteratorRecord];
+const IteratorToList = (iteratorRecord) => [...iteratorRecord["[[Iterator]]"]];
 
 
 /*
@@ -1611,7 +1715,7 @@ https://262.ecma-international.org/#sec-stringcreate
 https://tc39.es/ecma262/#sec-stringcreate
 10.4.3.4 StringCreate ( value, prototype )
 */
-function StringCreate(value, prototype) {
+function StringCreate (value, prototype) {
   if (typeof value !== "string") {
     throw new TypeError("StringCreate(); error");
   }
@@ -2225,6 +2329,27 @@ https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-createasy
 27.1.6.1 CreateAsyncFromSyncIterator ( syncIteratorRecord )
 TODO
 */
+function CreateAsyncFromSyncIterator(syncIteratorRecord) {
+  async function* createAsyncIterable(syncIterable) {
+    for (let item of syncIterable) { yield item; }
+  }
+  let asyncIterator =
+    createAsyncIterable(syncIteratorRecord["[[Iterator]]"]);
+  return {
+    "[[Iterator]]": asyncIterator,
+    "[[NextMethod]]": asyncIterator.next,
+    "[[Done]]": false
+  };
+}
+
+
+/*
+https://262.ecma-international.org/#sec-asyncfromsynciteratorcontinuation
+27.1.4.4 AsyncFromSyncIteratorContinuation ( result, promiseCapability )
+https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-asyncfromsynciteratorcontinuation
+27.1.6.4 AsyncFromSyncIteratorContinuation ( result, promiseCapability, syncIteratorRecord, closeOnRejection )
+TODO
+*/
 
 
 /*
@@ -2250,7 +2375,7 @@ function CreateHTML (string, tag, attribute, value) {
 /** object header **/
 
 
-const VERSION = "Zephyr v0.1.1 dev";
+const VERSION = "Zephyr v0.1.3 dev";
 
 
 /* zephyr.noConflict(): celestra object */
@@ -2347,13 +2472,13 @@ const zephyr = {
   /* SetterThatIgnoresPrototypeProperties, */
   GetIteratorDirect,
   GetIteratorFromMethod,
-  /* GetIterator, */
-  /* GetIteratorFlattenable, */
-  /* IteratorNext, */
+  GetIterator,
+  GetIteratorFlattenable,
+  IteratorNext,
   IteratorComplete,
   IteratorValue,
-  /* IteratorStep, */
-  /* IteratorStepValue, */
+  IteratorStep,
+  IteratorStepValue,
   /* IteratorClose, */
   /* IfAbruptCloseIterator, */
   /* AsyncIteratorClose, */
@@ -2420,7 +2545,8 @@ const zephyr = {
   CreateMapIterator,
   CreateSetIterator,
   CanonicalizeKeyedCollectionKey,
-  /* CreateAsyncFromSyncIterator, */
+  CreateAsyncFromSyncIterator,
+  /* AsyncFromSyncIteratorContinuation, */
   CreateHTML
 };
 
