@@ -1,4 +1,3 @@
-// same as 0.0.4
 
 /** polyfills **/
 

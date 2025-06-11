@@ -16,6 +16,7 @@ Version      | Changes
 0.1.1        | added the esm file
 0.1.2        | added the documentation
 0.1.3        | fixes and new functions
+0.1.4        | fixes and new functions
 
 
 ## API documentation
@@ -94,7 +95,7 @@ CreateArrayFromList();|[Link](https://262.ecma-international.org/#sec-createarra
 LengthOfArrayLike();|[Link](https://262.ecma-international.org/#sec-lengthofarraylike)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-lengthofarraylike)|__DONE__
 CreateListFromArrayLike();|[Link](https://262.ecma-international.org/#sec-createlistfromarraylike)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createlistfromarraylike)|__DONE__
 Invoke();|[Link](https://262.ecma-international.org/#sec-invoke)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-invoke)|__DONE__
-OrdinaryHasInstance();|[Link](https://262.ecma-international.org/#sec-ordinaryhasinstance)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-ordinaryhasinstance)|TODO
+OrdinaryHasInstance();|[Link](https://262.ecma-international.org/#sec-ordinaryhasinstance)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-ordinaryhasinstance)|__DONE__
 SpeciesConstructor();|[Link](https://262.ecma-international.org/#sec-speciesconstructor)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-speciesconstructor)|__DONE__
 EnumerableOwnProperties();|[Link](https://262.ecma-international.org/#sec-enumerableownproperties)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-enumerableownproperties)|__DONE__
 GetFunctionRealm();|[Link](https://262.ecma-international.org/#sec-getfunctionrealm)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getfunctionrealm)|TODO
@@ -107,8 +108,8 @@ PrivateGet();|[Link](https://262.ecma-international.org/#sec-privateget)|[Link](
 PrivateSet();|[Link](https://262.ecma-international.org/#sec-privateset)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-privateset)|TODO
 DefineField();|[Link](https://262.ecma-international.org/#sec-definefield)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-definefield)|TODO
 InitializeInstanceElements();|[Link](https://262.ecma-international.org/#sec-initializeinstanceelements)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-initializeinstanceelements)|TODO
-AddValueToKeyedGroup();|[Link](https://262.ecma-international.org/#sec-add-value-to-keyed-group)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-add-value-to-keyed-group)|TODO
-GroupBy();|[Link](https://262.ecma-international.org/#sec-groupby)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-groupby)|TODO
+AddValueToKeyedGroup();|[Link](https://262.ecma-international.org/#sec-add-value-to-keyed-group)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-add-value-to-keyed-group)|__DONE__
+GroupBy();|[Link](https://262.ecma-international.org/#sec-groupby)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-groupby)|__DONE__
 SetterThatIgnoresPrototypeProperties();||[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-SetterThatIgnoresPrototypeProperties)|TODO
 GetIteratorDirect();||[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratordirect)|__DONE__
 GetIteratorFromMethod();|[Link](https://262.ecma-international.org/#sec-getiteratorfrommethod)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratorfrommethod)|__DONE__
@@ -128,13 +129,13 @@ IteratorToList();|[Link](https://262.ecma-international.org/#sec-iteratortolist)
 OrdinaryObjectCreate();|[Link](https://262.ecma-international.org/#sec-ordinaryobjectcreate)|[Link](https://tc39.es/ecma262/#sec-ordinaryobjectcreate)|__DONE__
 OrdinaryCreateFromConstructor();|[Link](https://262.ecma-international.org/#sec-ordinarycreatefromconstructor)|[Link](https://tc39.es/ecma262/#sec-ordinarycreatefromconstructor)|__DONE__
 GetPrototypeFromConstructor();|[Link](https://262.ecma-international.org/#sec-getprototypefromconstructor)|[Link](https://tc39.es/ecma262/#sec-getprototypefromconstructor)|__DONE__
-RequireInternalSlot();|[Link](https://262.ecma-international.org/#sec-requireinternalslot)|[Link](https://tc39.es/ecma262/#sec-requireinternalslot)|TODO
+RequireInternalSlot();|[Link](https://262.ecma-international.org/#sec-requireinternalslot)|[Link](https://tc39.es/ecma262/#sec-requireinternalslot)|__DONE__
 OrdinaryFunctionCreate();|[Link](https://262.ecma-international.org/#sec-ordinaryfunctioncreate)|[Link](https://tc39.es/ecma262/#sec-ordinaryfunctioncreate)|__DONE__
 AddRestrictedFunctionProperties();|[Link](https://262.ecma-international.org/#sec-addrestrictedfunctionproperties)|[Link](https://tc39.es/ecma262/#sec-addrestrictedfunctionproperties)|TODO
 MakeConstructor();|[Link](https://262.ecma-international.org/#sec-makeconstructor)|[Link](https://tc39.es/ecma262/#sec-makeconstructor)|__DONE__
 MakeClassConstructor();|[Link](https://262.ecma-international.org/#sec-makeclassconstructor)|[Link](https://tc39.es/ecma262/#sec-makeclassconstructor)|TODO
-MakeMethod();|[Link](https://262.ecma-international.org/#sec-makemethod)|[Link](https://tc39.es/ecma262/#sec-makemethod)|TODO
-DefineMethodProperty();|[Link](https://262.ecma-international.org/#sec-definemethodproperty)|[Link](https://tc39.es/ecma262/#sec-definemethodproperty)|TODO
+MakeMethod();|[Link](https://262.ecma-international.org/#sec-makemethod)|[Link](https://tc39.es/ecma262/#sec-makemethod)|__DONE__
+DefineMethodProperty();|[Link](https://262.ecma-international.org/#sec-definemethodproperty)|[Link](https://tc39.es/ecma262/#sec-definemethodproperty)|__DONE__
 SetFunctionName();|[Link](https://262.ecma-international.org/#sec-setfunctionname)|[Link](https://tc39.es/ecma262/#sec-setfunctionname)|__DONE__
 SetFunctionLength();|[Link](https://262.ecma-international.org/#sec-setfunctionlength)|[Link](https://tc39.es/ecma262/#sec-setfunctionlength)|__DONE__
 FunctionDeclarationInstantiation();|[Link](https://262.ecma-international.org/#sec-functiondeclarationinstantiation)|[Link](https://tc39.es/ecma262/#sec-functiondeclarationinstantiation)|TODO
@@ -146,7 +147,7 @@ ArraySpeciesCreate();|[Link](https://262.ecma-international.org/#sec-arrayspecie
 ArraySetLength();|[Link](https://262.ecma-international.org/#sec-arraysetlength)|[Link](https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-arraysetlength)|__DONE__
 StringCreate();|[Link](https://262.ecma-international.org/#sec-stringcreate)|[Link](https://tc39.es/ecma262/#sec-stringcreate)|__DONE__
 StringGetOwnProperty();|[Link](https://262.ecma-international.org/#sec-stringgetownproperty)|[Link](https://tc39.es/ecma262/#sec-stringgetownproperty)|__DONE__
-CreateUnmappedArgumentsObject();|[Link](https://262.ecma-international.org/#sec-createunmappedargumentsobject)|[Link](https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-createunmappedargumentsobject)|TODO
+CreateUnmappedArgumentsObject();|[Link](https://262.ecma-international.org/#sec-createunmappedargumentsobject)|[Link](https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-createunmappedargumentsobject)|__DONE__
 CreateMappedArgumentsObject();|[Link](https://262.ecma-international.org/#sec-createmappedargumentsobject)|[Link](https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-createunmappedargumentsobject)|TODO
 MakeTypedArrayWithBufferWitnessRecord();|[Link](https://262.ecma-international.org/#sec-maketypedarraywithbufferwitnessrecord)|[Link](https://tc39.es/ecma262/#sec-maketypedarraywithbufferwitnessrecord)|TODO
 TypedArrayCreate();|[Link](https://262.ecma-international.org/#sec-typedarraycreate)|[Link](https://tc39.es/ecma262/#sec-typedarraycreate)|__DONE__
@@ -176,7 +177,7 @@ TrimString();|[Link](https://262.ecma-international.org/#sec-trimstring)|[Link](
 CreateArrayIterator();|[Link](https://262.ecma-international.org/#sec-createarrayiterator)|[Link](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-createarrayiterator)|__DONE__
 FindViaPredicate();|[Link](https://262.ecma-international.org/#sec-findviapredicate)|[Link](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-findviapredicate)|__DONE__
 FlattenIntoArray();|[Link](https://262.ecma-international.org/#sec-flattenintoarray)|[Link](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-flattenintoarray)|__DONE__
-SortIndexedProperties();|[Link](https://262.ecma-international.org/#sec-sortindexedproperties)|[Link](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-properties-of-the-array-prototype-object)|TODO
+SortIndexedProperties();|[Link](https://262.ecma-international.org/#sec-sortindexedproperties)|[Link](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-properties-of-the-array-prototype-object)|__DONE__
 CompareArrayElements();|[Link](https://262.ecma-international.org/#sec-comparearrayelements)|[Link](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-properties-of-the-array-prototype-object)|__DONE__
 TypedArrayElementSize();|[Link](https://262.ecma-international.org/#sec-typedarrayelementsize)|[Link](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-abstract-operations-for-typedarray-objects)|__DONE__
 TypedArrayElementType();|[Link](https://262.ecma-international.org/#sec-typedarrayelementtype)|[Link](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-typedarrayelementtype)|__DONE__

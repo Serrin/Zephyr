@@ -1,6 +1,6 @@
 /**
  * @name Zephyr
- * @version 0.1.3 dev
+ * @version 0.1.4 dev
  * @see https://github.com/Serrin/
  * @license MIT https://opensource.org/licenses/MIT
  */
@@ -17,6 +17,13 @@ if(!("MIN_SAFE_INTEGER" in Number)){Number.MIN_SAFE_INTEGER=-9007199254740991;}
 
 /* Number.MAX_SAFE_INTEGER; */
 if(!("MAX_SAFE_INTEGER" in Number)){Number.MAX_SAFE_INTEGER=9007199254740991;}
+
+/* Number.isInteger(); */
+Number.isInteger = Number.isInteger || function(value) {
+  return typeof value === "number"
+    && isFinite(value)
+    && Math.floor(value) === value;
+};
 
 
 /* Object.is(); SameValue */
@@ -489,8 +496,11 @@ https://262.ecma-international.org/#sec-isintegralnumber
 https://tc39.es/ecma262/multipage/abstract-operations.html
 NONE
 */
-const IsIntegralNumber = (argument) => (typeof argument === "number"
-  && isFinite(argument) && Math.trunc(argument) === argument);
+const IsIntegralNumber = Number.isInteger || function (argument) {
+  return typeof argument === "number"
+    && isFinite(argument)
+    && Math.floor(argument) === argument;
+};
 
 
 /*
@@ -884,8 +894,18 @@ https://262.ecma-international.org/#sec-ordinaryhasinstance
 7.3.21 OrdinaryHasInstance ( C, O )
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-ordinaryhasinstance
 7.3.21 OrdinaryHasInstance ( C, O )
-TODO
 */
+function OrdinaryHasInstance (C, O) {
+  const Type = (O) => (O === null ? "null" : typeof O);
+  if (Type(C) !== "function") { return false; }
+  if (Type(O) !== "object") { return false; }
+  if (Type(C.prototype) !== "object") {
+    throw new TypeError(
+      "OrdinaryHasInstance(); TypeError: C.prototype is not an object"
+    );
+  }
+  return O instanceof C;
+}
 
 
 /*
@@ -1030,8 +1050,26 @@ https://262.ecma-international.org/#sec-add-value-to-keyed-group
 7.3.34 AddValueToKeyedGroup ( groups, key, value )
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-add-value-to-keyed-group
 7.3.34 AddValueToKeyedGroup ( groups, key, value )
-TODO
 */
+function AddValueToKeyedGroup (groups, key, value) {
+  let count = 0, keyPos = 0;
+  groups.forEach(function (record, index) {
+    if (Object.is(record["[[Key]]"], key)) {
+      count++;
+      keyPos = index;
+    }
+  });
+  if (count > 1) {
+    throw new Error(
+      "AddValueToKeyedGroup(); Error: there are more records with the key"
+    );
+  }
+  if (!count) {
+    groups.push({"[[Key]]": key, "[[Elements]]": [value]});
+  } else {
+    groups[keyPos]["[[Elements]]"].push(value)
+  }
+}
 
 
 /*
@@ -1039,26 +1077,56 @@ https://262.ecma-international.org/#sec-groupby
 7.3.35 GroupBy ( items, callbackfn, keyCoercion )
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-groupby
 7.3.35 GroupBy ( items, callback, keyCoercion )
-TODO
 */
-/*
-if (!("groupBy" in Object)) {
-  Object.defineProperty(Object, "groupBy", {
-    "configurable": true, "writable": true, "enumerable": true,
-    "value": function (items, callbackFn) {
-      "use strict";
-      if (!(typeof callbackFn === "function")) { throw new TypeError(); }
-      let r = Object.create(null), i = 0;
-      for (let item of items) {
-        let key = callbackFn(item, i++);
-        if (!(Object.prototype.hasOwnProperty.call(r, key))) { r[key] = []; }
-        r[key].push(item);
+function GroupBy (items, callback, keyCoercion) {
+  const Type = (O) => (O === null ? "null" : typeof O);
+  function AddValueToKeyedGroup (groups, key, value) {
+    let count = 0, keyPos = 0;
+    groups.forEach(function (record, index) {
+      if (Object.is(record["[[Key]]"], key)) {
+        count++;
+        keyPos = index;
       }
-      return r;
+    });
+    if (count > 1) {
+      throw new Error(
+        "AddValueToKeyedGroup(); Error: there are more records with the key"
+      );
     }
-  });
+    if (!count) {
+      groups.push({"[[Key]]": key, "[[Elements]]": [value]});
+    } else {
+      groups[keyPos]["[[Elements]]"].push(value)
+    }
+  }
+  if (Type(items) !== "object") {
+    throw new TypeError("GroupBy(); TypeError: items is not an object");
+  }
+  if (Type(callback) !== "function") {
+    throw new TypeError("GroupBy(); TypeError: callback is not a function");
+  }
+  if (keyCoercion !== "PROPERTY" && keyCoercion !== "COLLECTION") {
+    throw new Error(
+      "GroupBy(); Error: keyCoercion has to be \"PROPERTY\" or \"COLLECTION\""
+    );
+  }
+  let k = 0;
+  let groups = [];
+  for (let item of items) {
+    if (k > (Math.pow(2, 53) - 1)) {
+      throw new RangeError("GroupBy(); RangeError: iterator size")
+    }
+    let key = callback(item, k);
+    if (keyCoercion === "PROPERTY") {
+      key = (typeof key === "symbol" ? key : String(key));
+    } else {
+      key = ((1 / key === -Infinity) ? 0 : key);
+    }
+    AddValueToKeyedGroup(groups, key, item);
+    k++;
+  }
+  return groups;
 }
-*/
 
 
 /*
@@ -1474,8 +1542,17 @@ https://262.ecma-international.org/#sec-requireinternalslot
 10.1.15 RequireInternalSlot ( O, internalSlot )
 https://tc39.es/ecma262/#sec-requireinternalslot
 10.1.15 RequireInternalSlot ( O, internalSlot )
-TODO
 */
+function RequireInternalSlot (O, internalSlot) {
+  if (O == null || typeof O !== "object") {
+    throw new TypeError("RequireInternalSlot(); TypeError: O is not an object");
+  }
+  if (!(internalSlot in O)) {
+    throw new TypeError(
+      "RequireInternalSlot(); TypeError: internalSlot not in O"
+    );
+  }
+}
 
 
 /*
@@ -1550,8 +1627,8 @@ https://262.ecma-international.org/#sec-makemethod
 10.2.7 MakeMethod ( F, homeObject )
 https://tc39.es/ecma262/#sec-makemethod
 10.2.7 MakeMethod ( F, homeObject )
-TODO
 */
+const MakeMethod = (F, homeObject) => void(F.prototype = homeObject);
 
 
 /*
@@ -1559,8 +1636,18 @@ https://262.ecma-international.org/#sec-definemethodproperty
 10.2.8 DefineMethodProperty ( homeObject, key, closure, enumerable )
 https://tc39.es/ecma262/#sec-definemethodproperty
 10.2.8 DefineMethodProperty ( homeObject, key, closure, enumerable )
-TODO
 */
+function DefineMethodProperty (homeObject, key, closure, enumerable) {
+  if (homeObject == null || typeof homeObject !== "object"
+    || !Object.isExtensible(homeObject)) {
+    throw new TypeError(
+      "DefineMethodProperty(); TypeError: homeObject is not an extensible object"
+    );
+  }
+  Object.defineProperty(homeObject, key,
+    {value: closure, writable: true, enumerable: enumerable, configurable: true}
+  );
+}
 
 
 /*
@@ -2163,8 +2250,36 @@ https://262.ecma-international.org/#sec-sortindexedproperties
 23.1.3.30.1 SortIndexedProperties ( obj, len, SortCompare, holes )
 https://tc39.es/ecma262/multipage/indexed-collections.html#sec-properties-of-the-array-prototype-object
 23.1.3.30.1 SortIndexedProperties ( obj, len, SortCompare, holes )
-TODO
 */
+function SortIndexedProperties (obj, len, SortCompare, holes) {
+  const Type = (O) => (O === null ? "null" : typeof O);
+  if (Type(obj) !== "object") {
+    throw new TypeError("SortIndexedProperties(); TypeError: obj is not an object");
+  }
+  if (Type(SortCompare) !== "function") {
+    throw new TypeError("SortIndexedProperties(); TypeError: SortCompare is not a function");
+  }
+  if (holes !== "SKIP-HOLES" && holes !== "READ-THROUGH-HOLES") {
+    throw new Error(
+      "SortIndexedProperties(); Error: holes has to be \"SKIP-HOLES\" or \"READ-THROUGH-HOLES\""
+    );
+  }
+  let items = [];
+  let k = 0;
+  while (k < len) {
+    let pK = String(k);
+    if (holes === "SKIP-HOLES") {
+      var kRead = pK in obj;
+    } else {
+      var kRead = true;
+    }
+    if (kRead) { items.push(obj[pK]); }
+    k++;
+  }
+  items.sort(SortCompare);
+  return items;
+}
+
 
 
 /*
@@ -2375,7 +2490,7 @@ function CreateHTML (string, tag, attribute, value) {
 /** object header **/
 
 
-const VERSION = "Zephyr v0.1.3 dev";
+const VERSION = "Zephyr v0.1.4 dev";
 
 
 /* zephyr.noConflict(): celestra object */
@@ -2456,7 +2571,7 @@ const zephyr = {
   LengthOfArrayLike,
   CreateListFromArrayLike,
   Invoke,
-  /* OrdinaryHasInstance, */
+  OrdinaryHasInstance,
   SpeciesConstructor,
   EnumerableOwnProperties,
   /* GetFunctionRealm, */
@@ -2468,7 +2583,8 @@ const zephyr = {
   /* PrivateSet, */
   /* DefineField, */
   /* InitializeInstanceElements, */
-  /* GroupBy, */
+  AddValueToKeyedGroup,
+  GroupBy,
   /* SetterThatIgnoresPrototypeProperties, */
   GetIteratorDirect,
   GetIteratorFromMethod,
@@ -2488,13 +2604,13 @@ const zephyr = {
   OrdinaryObjectCreate,
   OrdinaryCreateFromConstructor,
   GetPrototypeFromConstructor,
-  /* RequireInternalSlot, */
+  RequireInternalSlot,
   OrdinaryFunctionCreate,
   /* AddRestrictedFunctionProperties, */
   MakeConstructor,
   /* MakeClassConstructor, */
-  /* MakeMethod, */
-  /* DefineMethodProperty, */
+  MakeMethod,
+  DefineMethodProperty,
   SetFunctionName,
   SetFunctionLength,
   /* FunctionDeclarationInstantiation, */
@@ -2536,7 +2652,7 @@ const zephyr = {
   CreateArrayIterator,
   FindViaPredicate,
   FlattenIntoArray,
-  /* SortIndexedProperties, */
+  SortIndexedProperties,
   CompareArrayElements,
   TypedArrayElementSize,
   TypedArrayElementType,
