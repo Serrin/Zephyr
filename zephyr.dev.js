@@ -1,6 +1,6 @@
 /**
  * @name Zephyr
- * @version 0.1.4 dev
+ * @version 0.1.5 dev
  * @see https://github.com/Serrin/
  * @license MIT https://opensource.org/licenses/MIT
  */
@@ -2490,7 +2490,7 @@ function CreateHTML (string, tag, attribute, value) {
 /** object header **/
 
 
-const VERSION = "Zephyr v0.1.4 dev";
+const VERSION = "Zephyr v0.1.5 dev";
 
 
 /* zephyr.noConflict(): celestra object */

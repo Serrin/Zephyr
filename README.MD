@@ -1,12 +1,32 @@
 
 # Zephyr
 
-Collection of the ECMAScript abstract methods as standalone Javascript functions and a library with zero dependencies.
+## Download
 
-This is still in alpha version.
+__Collection of the ECMAScript abstract methods as standalone Javascript functions and a library with zero dependencies.__
+
+Latest version: 0.1.5
+
+Date: 2025-06-16T21:04:53.859Z
+
+__Tested on these browsers:__
+
+- Windows Firefox
+- Windows Chrome
+- Windows Edge
+- iOS Safari
+- iOS Firefox
+- iOS Chrome
+- iOS Edge
+- Android Firefox
+- Android Chrome
+- Android Samsung Internet
+- Android Edge
+
+The functions are available in the `zephyr` and/or `ES` object.
 
 
-## Zephyr alpha versions
+### Zephyr beta versions
 
 
 Version      | Changes
@@ -17,6 +37,63 @@ Version      | Changes
 0.1.2        | added the documentation
 0.1.3        | fixes and new functions
 0.1.4        | fixes and new functions
+0.1.5        | added more documenation
+
+
+### Files
+
+Edition|Filename
+-------|--------
+developer|__zephyr.dev.js__
+minified|__zephyr.min.js__
+ES6 module|__zephyr.esm.js__
+testpages|__testsuite-dev.html__<BR>__testsuite-min.html__<BR>__testsuite-esm1.html__<BR>__testsuite-esm2.html__
+
+DEV and MIN editions: If the `ES` global variable is used before the loading of the library, then the value of the variable is saved and you can restore with the `noConflict();` function.
+
+
+### Github pages
+
+version|page link
+-------|--------
+Stable|__https://github.com/Serrin/Zephyr__
+Beta|__https://github.com/Serrin/Zephyr__
+
+
+### How to import the ESM edition
+
+````javascript
+<script type="module">
+
+// import the defaultExport object
+import defaultExport from "./zephyr.esm.js";
+window.zephyr = defaultExport;
+window.ES = defaultExport;
+
+// import with default with name
+import { default as zephyr } from "./zephyr.esm.js";
+window.zephyr = zephyr;
+window.ES = zephyr;
+
+// import all into a new zephyr object
+import * as zephyr from "./zephyr.esm.js";
+window.zephyr = zephyr;
+window.ES = zephyr;
+
+// import some functions
+import { first, classof } from "./zephyr.esm.js";
+window.first = first;
+window.classof = classof;
+
+</script>
+````
+
+__Another way to import__
+
+
+````
+<script type="module"> import "./zephyr.min.js"; </script>
+````
 
 
 ## API documentation

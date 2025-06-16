@@ -20,13 +20,33 @@ body { max-width: 800px; margin: 0 auto; }
 
 <h1 class="center">Zephyr</h1>
 
-<p>Collection of the ECMAScript abstract methods as standalone Javascript functions and a library with zero dependencies. </p>
+<h2 id="download">Download</h2>
 
-<p>This is still in alpha version.</p>
+<p><b>Collection of the ECMAScript abstract methods as standalone Javascript functions and a library with zero dependencies.</b></p>
 
-<hr/>
+<p>Latest version: 0.1.5</p>
+<p>Date: 2025-06-16T21:04:53.859Z</p>
 
-<h2>Zephyr Alpha versions</h2>
+
+<p><b>Tested on these browsers:</b></p>
+
+ <ul>
+  <li>Windows Firefox</li>
+  <li>Windows Chrome</li>
+  <li>Windows Edge</li>
+  <li>iOS Safari</li>
+  <li>iOS Firefox</li>
+  <li>iOS Chrome</li>
+  <li>iOS Edge</li>
+  <li>Android Firefox</li>
+  <li>Android Chrome</li>
+  <li>Android Samsung Internet</li>
+  <li>Android Edge</li>
+</ul>
+
+<p>The functions are available in the <code>zephyr</code> and/or <code>ES</code> object.</p>
+
+<h3>Zephyr beta versions</h2>
 
 <table class="table-responsive-sm table-striped">
   <tr>
@@ -57,7 +77,95 @@ body { max-width: 800px; margin: 0 auto; }
     <td>0.1.4</td>
     <td>fixes and new functions</td>
   </tr>
+  <tr>
+    <td>0.1.5</td>
+    <td>added more documentation</td>
+  </tr>
 </table>
+
+
+<h3>Files</h3>
+
+<table class="table-responsive-sm table-striped">
+  <tr>
+    <td class="center"><b>Edition</b></td>
+    <td class="center"><b>Filename</b></td>
+  </tr>
+  <tr>
+    <td>developer</td>
+    <td><a href="zephyr.dev.js" target="_blank">zephyr.dev.js</a></td>
+  </tr>
+  <tr>
+    <td>minified</td>
+    <td><a href="zephyr.min.js" target="_blank">zephyr.min.js</a></td>
+  </tr>
+  <tr>
+    <td>ES6 module</td>
+    <td><a href="zephyr.esm.js" target="_blank">zephyr.esm.js</a></td>
+  </tr>
+  <tr>
+    <td class="center">testpages</td>
+    <td>
+      <a href="testsuite-dev.html" target="_blank">testsuite-dev.html</a><br/>
+      <a href="testsuite-min.html" target="_blank">testsuite-min.html</a><br/>
+      <a href="testsuite-esm1.html" target="_blank">testsuite-esm1.html</a><br/>
+      <a href="testsuite-esm2.html" target="_blank">testsuite-esm2.html</a>
+    </td>
+  </tr>
+</table>
+
+<p>DEV and MIN editions: If the <code>ES</code> global variable is used before the loading of the library, then the value of the variable is saved and you can restore with the <code>noConflict();</code> function.</p>
+
+
+<h3>Github pages</h3>
+
+<table class="table-responsive-sm table-striped">
+  <tr>
+    <td class="center"><b>version</b></td>
+    <td class="center"><b>page link</b></td>
+  </tr>
+  <tr>
+    <td>Stable</td>
+    <td><a href="https://github.com/Serrin/Zephyr" target="_blank">https://github.com/Serrin/Zephyr</a></td>
+  </tr>
+  <tr>
+    <td>Beta</td>
+    <td><a href="https://github.com/Serrin/Zephyr" target="_blank">https://github.com/Serrin/Zephyr</a></td>
+  </tr>
+</table>
+
+
+<h3>How to import the ESM edition</h3>
+
+<pre>
+&#60;script type="module"&#62;
+
+// import the defaultExport object
+import defaultExport from "./zephyr.esm.js";
+window.zephyr = defaultExport;
+window.ES = defaultExport;
+
+// import with default with name
+import { default as zephyr } from "./zephyr.esm.js";
+window.zephyr = zephyr;
+window.ES = zephyr;
+
+// import all into a new zephyr object
+import * as zephyr from "./zephyr.esm.js";
+window.zephyr = zephyr;
+window.ES = zephyr;
+
+// import some functions
+import { first, classof } from "./zephyr.esm.js";
+window.first = first;
+window.classof = classof;
+
+&#60;/script&#62;
+</pre>
+
+<p><b>Another way to import</b></p>
+
+<pre>&#60;script type="module"&#62; import "./zephyr.min.js"; &#60;/script&#62;</pre>
 
 
 <hr/>
