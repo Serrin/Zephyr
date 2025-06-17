@@ -1,6 +1,6 @@
 /**
  * @name Zephyr
- * @version 0.1.5 dev
+ * @version 0.1.6 dev
  * @see https://github.com/Serrin/
  * @license MIT https://opensource.org/licenses/MIT
  */
@@ -41,6 +41,30 @@ Object.hasOwn=Object.hasOwn||((O,P)=>Object.prototype.hasOwnProperty.call(O,P));
 
 
 /*
+https://262.ecma-international.org/#sec-completion-ao
+5.2.3.1 Completion ( completionRecord )
+https://tc39.es/ecma262/multipage/notational-conventions.html#sec-runtime-semantics
+5.2.3.1 Completion ( completionRecord )
+completionRecord:
+https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-completion-record-specification-type
+*/
+function Completion (completionRecord) {
+  if (completionRecord != null && typeof completionRecord === "object") {
+    let crKeys = Object.keys(completionRecord);
+    if (crKeys.length === 3
+      && crKeys.includes("[[Type]]")
+      && crKeys.includes("[[Value]]")
+      && crKeys.includes("[[Target]]")) {
+      return completionRecord;
+    }
+  }
+  throw new TypeError(
+    "Completion(); TypeError: completionRecord is not a Completion Record"
+  );
+}
+
+
+/*
 https://262.ecma-international.org/#sec-ecmascript-language-types
 6.1 ECMAScript Language Types
 https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-ecmascript-data-types-and-values
@@ -68,6 +92,71 @@ https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-stri
 */
 const StringLastIndexOf = (string, searchValue, fromIndex) =>
   string.lastIndexOf(searchValue, fromIndex);
+
+
+/*
+https://262.ecma-international.org/#sec-normalcompletion
+6.2.4.1 NormalCompletion ( value )
+https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-normalcompletion
+6.2.4.1 NormalCompletion ( value )
+*/
+const NormalCompletion = (value) =>
+  ({"[[Type]]": "NORMAL", "[[Value]]": value, "[[Target]]": undefined});
+
+
+/*
+https://262.ecma-international.org/#sec-throwcompletion
+6.2.4.2 ThrowCompletion ( value )
+https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-throwcompletion
+6.2.4.2 ThrowCompletion ( value )
+*/
+const ThrowCompletion = (value) =>
+  ({"[[Type]]": "THROW", "[[Value]]": value, "[[Target]]": undefined});
+
+
+/*
+https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-completion-record-specification-type
+NONE
+https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-returncompletion
+6.2.4.3 ReturnCompletion ( value )
+*/
+const ReturnCompletion = (value) =>
+  ({"[[Type]]": "RETURN", "[[Value]]": value, "[[Target]]": undefined});
+
+/*
+https://262.ecma-international.org/#sec-updateempty
+6.2.4.3 UpdateEmpty ( completionRecord, value )
+https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-updateempty
+6.2.4.4 UpdateEmpty ( completionRecord, value )
+*/
+function UpdateEmpty (completionRecord, value) {
+  function Completion (completionRecord) {
+    if (completionRecord != null && typeof completionRecord === "object") {
+      let crKeys = Object.keys(completionRecord);
+      if (crKeys.length === 3
+        && crKeys.includes("[[Type]]")
+        && crKeys.includes("[[Value]]")
+        && crKeys.includes("[[Target]]")) {
+          return completionRecord;
+      }
+    }
+    throw new TypeError(
+      "Completion(); TypeError: completionRecord is not a Completion Record"
+    );
+  }
+  Completion(completionRecord);
+  if (completionRecord["[[Type]]"] === "RETURN"
+    || completionRecord["[[Type]]"] === "THROW") {
+    if (completionRecord["[[Value]]"] !== undefined) {
+      return completionRecord;
+    }
+    return {
+      "[[Type]]": completionRecord["[[Type]]"],
+      "[[Value]]": value,
+      "[[Target]]": completionRecord["[[Target]]"]
+    };
+  }
+}
 
 
 /*
@@ -1394,32 +1483,48 @@ https://262.ecma-international.org/#sec-iteratorclose
 7.4.9 IteratorClose ( iteratorRecord, completion )
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorclose
 7.4.11 IteratorClose ( iteratorRecord, completion )
-TODO
 */
-/*
-function IteratorClose(iteratorRecord, completion) {
-  const Type = (O) => (O === null ? "null" : typeof O);
-  if (Type(iteratorRecord["[[Iterator]]"]) !== "object") {
-    throw new Error("IteratorClose(); Error: "
-      + iteratorRecord["[[Iterator]]"] + "is not an object."
+function IteratorClose (iteratorRecord, completion) {
+  function GetMethod (O, P) {
+    let func = O[P];
+    if (func == null) { return undefined; }
+    if (typeof func !== "function") {
+      throw new TypeError("Method not callable: " + P);
+    }
+    return func;
+  }
+  function Completion (completionRecord) {
+    if (completionRecord != null && typeof completionRecord === "object") {
+      let crKeys = Object.keys(completionRecord);
+      if (crKeys.length === 3
+        && crKeys.includes("[[Type]]")
+        && crKeys.includes("[[Value]]")
+        && crKeys.includes("[[Target]]")) {
+          return completionRecord;
+      }
+    }
+    throw new TypeError(
+      "Completion(); TypeError: completionRecord is not a Completion Record"
     );
   }
   let iterator = iteratorRecord["[[Iterator]]"];
-  let returnMethod = iterator["return"];
-  if (returnMethod === undefined) { return completion; }
-  let innerResult;
-  let innerException;
-  try {
-    innerResult = Reflect.apply(returnMethod, iterator, []);
-  } catch (e) { innerException = e; }
-  if (completion) { return completion; }
-  if (innerException) { throw innerException; }
-  if (Type(innerResult) !== "object") {
-    throw new TypeError("Iterator.return method returned not an object.");
+  if (iterator == null || typeof iterator !== "object") {
+    throw new TypeError(
+      "IteratorClose(); TypeError: iterator have to be an object"
+    );
   }
-  return completion;
+  let innerReturn = GetMethod(iterator, "return");
+  if (innerReturn === undefined) { return Completion(completion); }
+  let innerResult = Reflect.apply(innerReturn, iterator, []);
+  if (completion["[[Type]]"] === "THROW") { return completion; }
+  if (innerResult["[[Type]]"] === "THROW") { return innerResult; }
+  if (innerResult == null || typeof innerResult !== "object") {
+    throw new TypeError(
+      "Completion(); TypeError: iterator return function return value is not an object"
+    );
+  }
+  return Completion(completion);
 }
-*/
 
 
 /*
@@ -2490,7 +2595,7 @@ function CreateHTML (string, tag, attribute, value) {
 /** object header **/
 
 
-const VERSION = "Zephyr v0.1.5 dev";
+const VERSION = "Zephyr v0.1.6 dev";
 
 
 /* zephyr.noConflict(): celestra object */
@@ -2502,9 +2607,14 @@ const zephyr = {
   VERSION,
   noConflict,
   /** API **/
+  Completion,
   Type,
   StringIndexOf,
   StringLastIndexOf,
+  NormalCompletion,
+  ThrowCompletion,
+  ReturnCompletion,
+  UpdateEmpty,
   /* IsAccessorDescriptor, */
   /* IsDataDescriptor, */
   /* IsGenericDescriptor, */
@@ -2595,7 +2705,7 @@ const zephyr = {
   IteratorValue,
   IteratorStep,
   IteratorStepValue,
-  /* IteratorClose, */
+  IteratorClose,
   /* IfAbruptCloseIterator, */
   /* AsyncIteratorClose, */
   CreateIteratorResultObject,

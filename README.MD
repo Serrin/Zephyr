@@ -5,9 +5,9 @@
 
 __Collection of the ECMAScript abstract methods as standalone Javascript functions and a library with zero dependencies.__
 
-Latest version: 0.1.5
+Latest version: 0.1.6
 
-Date: 2025-06-16T21:04:53.859Z
+Date: 2025-06-17T19:17:13.681Z
 
 __Tested on these browsers:__
 
@@ -37,10 +37,11 @@ Version      | Changes
 0.1.2        | added the documentation
 0.1.3        | fixes and new functions
 0.1.4        | fixes and new functions
-0.1.5        | added more documenation
+0.1.5        | added more documentation
+0.1.6        | fixes and new functions
 
 
-### Files
+### Editions
 
 Edition|Filename
 -------|--------
@@ -81,9 +82,9 @@ window.zephyr = zephyr;
 window.ES = zephyr;
 
 // import some functions
-import { first, classof } from "./zephyr.esm.js";
-window.first = first;
-window.classof = classof;
+import { Type, HasProperty } from "./zephyr.esm.js";
+window.Type = Type;
+window.HasProperty = HasProperty;
 
 </script>
 ````
@@ -103,9 +104,14 @@ Function|262|TC39|Status
 --------|--------------|--------------|------
 VERSION;|||__DONE__
 noConflict();|||__DONE__
+Completion();|[Link](https://262.ecma-international.org/#sec-completion-ao)|[Link](https://tc39.es/ecma262/multipage/notational-conventions.html#sec-runtime-semantics)|__DONE__
 Type();|[Link](https://262.ecma-international.org/#sec-ecmascript-language-types)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-ecmascript-data-types-and-values)|__DONE__
 StringIndexOf();|[Link](https://262.ecma-international.org/#sec-stringindexof)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-stringindexof)|__DONE__
 StringLastIndexOf();|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-stringlastindexof)||__DONE__
+NormalCompletion();|[Link](https://262.ecma-international.org/#sec-normalcompletion)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-normalcompletion)|__DONE__
+ThrowCompletion();|[Link](https://262.ecma-international.org/#sec-throwcompletion)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-throwcompletion)|__DONE__
+ReturnCompletion();||[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-returncompletion)|__DONE__
+UpdateEmpty();|[Link](https://262.ecma-international.org/#sec-updateempty)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-updateempty)|__DONE__
 IsAccessorDescriptor();|[Link](https://262.ecma-international.org/#sec-isaccessordescriptor)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-isaccessordescriptor)|TODO
 IsDataDescriptor();|[Link](https://262.ecma-international.org/#sec-isdatadescriptor)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-isdatadescriptor)|TODO
 IsGenericDescriptor();|[Link](https://262.ecma-international.org/#sec-isgenericdescriptor)|[Link](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-isdatadescriptor)|TODO
@@ -197,7 +203,7 @@ IteratorComplete();|[Link](https://262.ecma-international.org/#sec-iteratorcompl
 IteratorValue();|[Link](https://262.ecma-international.org/#sec-iteratorvalue)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorvalue)|__DONE__
 IteratorStep();|[Link](https://262.ecma-international.org/#sec-iteratorstep)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstep)|__DONE__
 IteratorStepValue();|[Link](https://262.ecma-international.org/#sec-iteratorstepvalue)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstepvalue)|__DONE__
-IteratorClose();|[Link](https://262.ecma-international.org/#sec-iteratorclose)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorclose)|TODO
+IteratorClose();|[Link](https://262.ecma-international.org/#sec-iteratorclose)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorclose)|__DONE__
 IfAbruptCloseIterator();|[Link](https://262.ecma-international.org/#sec-ifabruptcloseiterator)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-ifabruptcloseiterator)|TODO
 AsyncIteratorClose();|[Link](https://262.ecma-international.org/#sec-asynciteratorclose)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-asynciteratorclose)|TODO
 CreateIteratorResultObject();|[Link](https://262.ecma-international.org/#sec-createiterresultobject)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createiterresultobject)|__DONE__

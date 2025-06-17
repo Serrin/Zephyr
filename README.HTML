@@ -24,8 +24,8 @@ body { max-width: 800px; margin: 0 auto; }
 
 <p><b>Collection of the ECMAScript abstract methods as standalone Javascript functions and a library with zero dependencies.</b></p>
 
-<p>Latest version: 0.1.5</p>
-<p>Date: 2025-06-16T21:04:53.859Z</p>
+<p>Latest version: 0.1.6</p>
+<p>Date: 2025-06-17T19:17:13.681Z</p>
 
 
 <p><b>Tested on these browsers:</b></p>
@@ -81,10 +81,14 @@ body { max-width: 800px; margin: 0 auto; }
     <td>0.1.5</td>
     <td>added more documentation</td>
   </tr>
+  <tr>
+    <td>0.1.6</td>
+    <td>fixes and new functions</td>
+  </tr>
 </table>
 
 
-<h3>Files</h3>
+<h3>Editions</h3>
 
 <table class="table-responsive-sm table-striped">
   <tr>
@@ -156,9 +160,9 @@ window.zephyr = zephyr;
 window.ES = zephyr;
 
 // import some functions
-import { first, classof } from "./zephyr.esm.js";
-window.first = first;
-window.classof = classof;
+import { Type, HasProperty } from "./zephyr.esm.js";
+window.Type = Type;
+window.HasProperty = HasProperty;
 
 &#60;/script&#62;
 </pre>
@@ -192,6 +196,12 @@ window.classof = classof;
     <td><span class="success">DONE</span></td>
   </tr>
   <tr>
+    <td>Completion();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-completion-ao">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/notational-conventions.html#sec-runtime-semantics">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
     <td>Type();</td>
     <td><a target="_blank" href="https://262.ecma-international.org/#sec-ecmascript-language-types">Link</a></td>
     <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-ecmascript-data-types-and-values">Link</a></td>
@@ -207,6 +217,30 @@ window.classof = classof;
     <td>StringLastIndexOf();</td>
     <td></td>
     <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-stringlastindexof">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>NormalCompletion();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-normalcompletion">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-normalcompletion">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ThrowCompletion();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-throwcompletion">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-throwcompletion">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ReturnCompletion();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-returncompletion">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>UpdateEmpty();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-updateempty">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-updateempty">Link</a></td>
     <td><span class="success">DONE</span></td>
   </tr>
   <tr>
@@ -759,7 +793,7 @@ window.classof = classof;
     <td>IteratorClose();</td>
     <td><a target="_blank" href="https://262.ecma-international.org/#sec-iteratorclose">Link</a></td>
     <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorclose">Link</a></td>
-    <td><span class="warning">TODO</span></td>
+    <td><span class="success">DONE</span></td>
   </tr>
   <tr>
     <td>IfAbruptCloseIterator();</td>
