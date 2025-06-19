@@ -1,6 +1,6 @@
 /**
  * @name Zephyr
- * @version 0.1.6 dev
+ * @version 0.1.7 dev
  * @see https://github.com/Serrin/
  * @license MIT https://opensource.org/licenses/MIT
  */
@@ -315,12 +315,8 @@ https://tc39.es/ecma262/#sec-tointegerorinfinity
 7.1.5 ToIntegerOrInfinity ( argument )
 */
 function ToIntegerOrInfinity (argument) {
-  argument = +(argument);
-  if (argument !== argument || 1/argument === Infinity || 1/argument === -Infinity) {
-    return 0;
-  }
-  if (argument === Infinity || argument === -Infinity) { return argument; }
-  return Math.trunc(argument);
+  let v = Math.trunc(+argument);
+  return (v !== v || v === 0) ? 0 : v;
 }
 
 
@@ -481,15 +477,10 @@ https://tc39.es/ecma262/#sec-tolength
 7.1.20 ToLength ( argument )
 */
 function ToLength (argument) {
-  /* ToIntegerOrInfinity begin */
-  let v = +argument;
-  if (1/v === Infinity || 1/v === -Infinity || v !== v) { v = 0; }
-  let len = ((v === Infinity || v === -Infinity) ? v : Math.trunc(v));
-  /* ToIntegerOrInfinity end */
-  if (len < 0) { return 0; }
-  return Math.min(len, Math.pow(2, 53) - 1);
+  let v = Math.trunc(+argument);
+  v = ((v !== v || v === 0) ? 0 : v);
+  return Math.min(Math.max(v, 0), Math.pow(2, 53) - 1);
 }
-
 
 /*
 https://262.ecma-international.org/#sec-canonicalnumericindexstring
@@ -525,15 +516,12 @@ https://tc39.es/ecma262/#sec-toindex
 7.1.22 ToIndex ( value )
 */
 function ToIndex (argument) {
-  /* ToIntegerOrInfinity begin */
-  let v = Number(argument);
-  if (1/v === Infinity || 1/v === -Infinity || v !== v) { v = 0; }
-  let integer = ((v === Infinity || v === -Infinity) ? v : Math.trunc(v));
-  /* ToIntegerOrInfinity end */
-  if (integer < 0 || integer > (Math.pow(2, 53) - 1)) {
-    throw new RangeError("ToIndex(); RangeError: " + integer);
+  let v = Math.trunc(+argument);
+  if (v !== v || v === 0) { return 0; }
+  if (v < 0 || v > (Math.pow(2, 53) - 1)) {
+    throw new RangeError("ToIndex(); RangeError: " + v);
   }
-  return integer;
+  return v;
 }
 
 
@@ -1223,8 +1211,42 @@ https://262.ecma-international.org/
 NONE
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-SetterThatIgnoresPrototypeProperties
 7.3.36 SetterThatIgnoresPrototypeProperties ( thisValue, home, p, v )
-TODO
 */
+function SetterThatIgnoresPrototypeProperties (thisValue, home, p, v) {
+  function CreateDataPropertyOrThrow (O, P, V) {
+    Object.defineProperty(O, P, {
+      writable: true, enumerable: true, configurable: true, value: V
+    });
+    if (O[P] !== V) {
+      throw new Error(
+        "CreateDataPropertyOrThrow(); error: " + O + "[" + P + "]"
+      );
+    }
+    return O;
+  }
+  function Set (O, P, V, Throw = false) {
+    O[P] = V;
+    if (O[P] !== V && Throw) {
+      throw new TypeError("Set(); error: " + O + "[" + P + "]");
+    }
+  }
+  if ((thisValue != null && typeof thisValue !== "object")) {
+    throw new TypeError(
+      "SetterThatIgnoresPrototypeProperties(); TypeError: thisValue is not an object"
+    );
+  }
+  if (Object.is(thisValue, home)) {
+    throw new TypeError(
+      "SetterThatIgnoresPrototypeProperties(); TypeError: Throwing here emulates assignment to a non-writable data property on the home object in strict mode code."
+    );
+  }
+  let desc = thisValue[p];
+  if (desc === undefined) {
+    CreateDataPropertyOrThrow(thisValue, p, v);
+  } else {
+     Set(thisValue, p, v, true);
+  }
+}
 
 
 /*
@@ -1574,6 +1596,48 @@ https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratortolist
 7.4.16 IteratorToList ( iteratorRecord )
 */
 const IteratorToList = (iteratorRecord) => [...iteratorRecord["[[Iterator]]"]];
+
+
+/*
+https://262.ecma-international.org/#sec-clear-kept-objects
+9.11 ClearKeptObjects ( )
+https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-clear-kept-objects
+9.10 ClearKeptObjects ( )
+TODO
+*/
+
+
+/*
+https://262.ecma-international.org/#sec-addtokeptobjects
+9.12 AddToKeptObjects ( value )
+https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-addtokeptobjects
+9.11 AddToKeptObjects ( value )
+TODO
+*/
+
+
+/*
+https://262.ecma-international.org/#sec-cleanup-finalization-registry
+9.13 CleanupFinalizationRegistry ( finalizationRegistry )
+https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-cleanup-finalization-registry
+9.12 CleanupFinalizationRegistry ( finalizationRegistry )
+TODO
+*/
+
+
+/*
+https://262.ecma-international.org/#sec-canbeheldweakly
+9.14 CanBeHeldWeakly ( v )
+https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-canbeheldweakly
+9.13 CanBeHeldWeakly ( v )
+*/
+function CanBeHeldWeakly (v) {
+  if (v != null && typeof v === "object") { return true; }
+  if (typeof v === "symbol" && Symbol.keyFor(v) === undefined) {
+    return true;
+  }
+  return false;
+}
 
 
 /*
@@ -2411,6 +2475,60 @@ function CompareArrayElements ( x, y, comparator  ) {
 
 
 /*
+https://262.ecma-international.org/#typedarray-species-create
+23.2.4.1 TypedArraySpeciesCreate ( exemplar, argumentList )
+https://tc39.es/ecma262/multipage/indexed-collections.html#typedarray-species-create
+23.2.4.1 TypedArraySpeciesCreate ( exemplar, argumentList )
+*/
+const TypedArraySpeciesCreate = (constructor, argumentList) =>
+  Reflect.construct(constructor, argumentList);
+
+
+/*
+https://262.ecma-international.org/#sec-typedarraycreatefromconstructor
+23.2.4.2 TypedArrayCreateFromConstructor ( constructor, argumentList )
+https://tc39.es/ecma262/multipage/indexed-collections.html#sec-typedarraycreatefromconstructor
+23.2.4.2 TypedArrayCreateFromConstructor ( constructor, argumentList )
+*/
+const TypedArrayCreateFromConstructor = (constructor, argumentList) =>
+  Reflect.construct(constructor, argumentList);
+
+
+/*
+https://262.ecma-international.org/#sec-typedarray-create-same-type
+23.2.4.3 TypedArrayCreateSameType ( exemplar, argumentList )
+https://tc39.es/ecma262/multipage/indexed-collections.html#sec-typedarray-create-same-type
+23.2.4.3 TypedArrayCreateSameType ( exemplar, argumentList )
+*/
+const TypedArrayCreateSameType = (exemplar, argumentList) =>
+  Reflect.construct(Object.getPrototypeOf(exemplar).constructor, argumentList);
+
+
+
+/*
+https://262.ecma-international.org/#sec-validatetypedarray
+23.2.4.4 ValidateTypedArray ( O, order )
+https://tc39.es/ecma262/multipage/indexed-collections.html#sec-validatetypedarray
+23.2.4.4 ValidateTypedArray ( O, order )
+*/
+const ValidateTypedArray = (O, order) =>(
+  O instanceof Int8Array
+    || O instanceof Uint8Array
+    || O instanceof Uint8ClampedArray
+    || O instanceof Int16Array
+    || O instanceof Uint16Array
+    || O instanceof Int32Array
+    || O instanceof Uint32Array
+    || ("Float16Array" in window ? O instanceof Float16Array : false)
+    || O instanceof Float32Array
+    || O instanceof Float64Array
+    || O instanceof BigInt64Array
+    || O instanceof BigUint64Array
+);
+
+
+
+/*
 https://262.ecma-international.org/#sec-typedarrayelementsize
 23.2.4.5 TypedArrayElementSize ( O )
 https://tc39.es/ecma262/multipage/indexed-collections.html#sec-abstract-operations-for-typedarray-objects
@@ -2520,6 +2638,98 @@ function CreateMapIterator (map, kind) {
 
 
 /*
+https://262.ecma-international.org/
+NONE
+https://tc39.es/ecma262/multipage/keyed-collections.html#sec-getsetrecord
+24.2.1.2 GetSetRecord ( obj )
+*/
+function GetSetRecord (obj) {
+  function ToIntegerOrInfinity (argument) {
+    let v = Math.trunc(+argument);
+    return (v !== v || v === 0) ? 0 : v;
+  }
+  function GetMethod (O, P) {
+    let func = O[P];
+    if (func == null) { return undefined; }
+    if (typeof func !== "function") {
+      throw new TypeError("Method not callable: " + P);
+    }
+    return func;
+  }
+  if ((obj == null || typeof obj !== "object")) {
+    throw new TypeError(
+      "GetSetRecord(); TypeError: obj is not an object"
+    );
+  }
+  let numSize = +obj["size"];
+  if (numSize !== numSize) {
+    throw new TypeError("GetSetRecord(); TypeError: numSize is NaN");
+  }
+  let intSize = ToIntegerOrInfinity(numSize);
+  if (intSize < 0) {
+    throw new TypeError("GetSetRecord(); TypeError: intSize is less then 0");
+  }
+  return{
+    "[[SetObject]]": obj,
+    "[[Size]]": intSize,
+    "[[Has]]": GetMethod(obj, "has"),
+    "[[Keys]]": GetMethod(obj, "keys")
+  };
+}
+
+
+/*
+https://262.ecma-international.org/
+NONE
+https://tc39.es/ecma262/#sec-setdatahas
+24.2.1.3 SetDataHas ( setData, value )
+*/
+function SetDataHas (setData, value) {
+  let i = 0;
+  for (let item of setData) {
+    if (item != null && (item === value || (item !== item && value !== value))){
+      return true;
+    }
+    i++;
+  }
+  return false;
+}
+
+
+/*
+https://262.ecma-international.org/
+NONE
+https://tc39.es/ecma262/multipage/keyed-collections.html#sec-setdataindex
+24.2.1.4 SetDataIndex ( setData, value )
+*/
+function SetDataIndex (setData, value) {
+  let i = 0;
+  for (let item of setData) {
+    if (item != null && (item === value || (item !== item && value !== value))){
+      return i;
+    }
+    i++;
+  }
+  return "NOT-FOUND";
+}
+
+
+/*
+https://262.ecma-international.org/
+NONE
+https://tc39.es/ecma262/multipage/keyed-collections.html#sec-setdatasize
+24.2.1.5 SetDataSize ( setData )
+*/
+function SetDataSize (setData) {
+  let i = 0;
+  for (let item of setData) {
+    if (item != null) { i++; }
+  }
+  return i;
+}
+
+
+/*
 https://262.ecma-international.org/#sec-createsetiterator
 24.2.5.1 CreateSetIterator ( set, kind )
 https://tc39.es/ecma262/multipage/keyed-collections.html#sec-createsetiterator
@@ -2540,6 +2750,15 @@ https://tc39.es/ecma262/multipage/keyed-collections.html#sec-canonicalizekeyedco
 */
 const CanonicalizeKeyedCollectionKey =
   (key) => ((1/key === -Infinity) ? 0 : key);
+
+
+/*
+https://262.ecma-international.org/#sec-weakref-abstract-operations
+26.1.4.1 WeakRefDeref ( weakRef )
+https://tc39.es/ecma262/multipage/managing-memory.html#sec-weakrefderef
+26.1.4.1 WeakRefDeref ( weakRef )
+*/
+const WeakRefDeref = (weakRef) => void(weakRef.deref());
 
 
 /*
@@ -2573,6 +2792,74 @@ TODO
 
 
 /*
+https://262.ecma-international.org/#sec-createresolvingfunctions
+27.2.1.3 CreateResolvingFunctions ( promise )
+https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-createresolvingfunctions
+27.2.1.3 CreateResolvingFunctions ( promise )
+TODO
+*/
+
+
+/*
+https://262.ecma-international.org/#sec-fulfillpromise
+27.2.1.4 FulfillPromise ( promise, value )
+https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-fulfillpromise
+27.2.1.4 FulfillPromise ( promise, value )
+TODO
+*/
+
+
+/*
+https://262.ecma-international.org/#sec-newpromisecapability
+27.2.1.5 NewPromiseCapability ( C )
+https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-newpromisecapability
+27.2.1.5 NewPromiseCapability ( C )
+TODO
+*/
+
+
+/*
+https://262.ecma-international.org/#sec-ispromise
+27.2.1.6 IsPromise ( x )
+https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-ispromise
+27.2.1.6 IsPromise ( x )
+*/
+const IsPromise = (x) => (x instanceof Promise ||
+  (x != null && typeof x === "object"
+    && typeof x.then === "function" && typeof x.catch  === "function")
+);
+
+
+/*
+https://262.ecma-international.org/#sec-rejectpromise
+27.2.1.7 RejectPromise ( promise, reason )
+https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-rejectpromise
+27.2.1.7 RejectPromise ( promise, reason )
+TODO
+*/
+// const RejectPromise = (promise, reason) => void(Promise.reject(reason));
+// const RejectPromise = (promise, reason) => void(promise.reject(reason));
+
+
+/*
+https://262.ecma-international.org/#sec-triggerpromisereactions
+27.2.1.8 TriggerPromiseReactions ( reactions, argument )
+https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-triggerpromisereactions
+27.2.1.8 TriggerPromiseReactions ( reactions, argument )
+TODO
+*/
+
+
+/*
+https://262.ecma-international.org/#sec-host-promise-rejection-tracker
+27.2.1.9 HostPromiseRejectionTracker ( promise, operation )
+https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-host-promise-rejection-tracker
+27.2.1.9 HostPromiseRejectionTracker ( promise, operation )
+TODO
+*/
+
+
+/*
 https://262.ecma-international.org/#sec-createhtml
 B.2.2.2.1 CreateHTML ( string, tag, attribute, value )
 https://tc39.es/ecma262/multipage/additional-ecmascript-features-for-web-browsers.html#sec-createhtml
@@ -2595,17 +2882,22 @@ function CreateHTML (string, tag, attribute, value) {
 /** object header **/
 
 
-const VERSION = "Zephyr v0.1.6 dev";
+const VERSION = "Zephyr v0.1.7 dev";
 
 
 /* zephyr.noConflict(): celestra object */
 function noConflict () { window.ES = zephyr.__prevES__; return zephyr; }
 
 
+/* NONE */
+const IsObject = (x) => (x != null && typeof x === "object");
+
+
 const zephyr = {
   /** object header **/
   VERSION,
   noConflict,
+  IsObject,
   /** API **/
   Completion,
   Type,
@@ -2695,7 +2987,7 @@ const zephyr = {
   /* InitializeInstanceElements, */
   AddValueToKeyedGroup,
   GroupBy,
-  /* SetterThatIgnoresPrototypeProperties, */
+  SetterThatIgnoresPrototypeProperties,
   GetIteratorDirect,
   GetIteratorFromMethod,
   GetIterator,
@@ -2711,6 +3003,10 @@ const zephyr = {
   CreateIteratorResultObject,
   CreateListIteratorRecord,
   IteratorToList,
+  /* ClearKeptObjects, */
+  /* AddToKeptObjects, */
+  /* CleanupFinalizationRegistry, */
+  CanBeHeldWeakly,
   OrdinaryObjectCreate,
   OrdinaryCreateFromConstructor,
   GetPrototypeFromConstructor,
@@ -2764,15 +3060,31 @@ const zephyr = {
   FlattenIntoArray,
   SortIndexedProperties,
   CompareArrayElements,
+  TypedArraySpeciesCreate,
+  TypedArrayCreateFromConstructor,
+  TypedArrayCreateSameType,
+  ValidateTypedArray,
   TypedArrayElementSize,
   TypedArrayElementType,
   AddEntriesFromIterable,
   CompareTypedArrayElements,
   CreateMapIterator,
+  GetSetRecord,
+  SetDataHas,
+  SetDataIndex,
+  SetDataSize,
   CreateSetIterator,
   CanonicalizeKeyedCollectionKey,
+  WeakRefDeref,
   CreateAsyncFromSyncIterator,
   /* AsyncFromSyncIteratorContinuation, */
+  /* CreateResolvingFunctions, */
+  /* FulfillPromise, */
+  /* NewPromiseCapability, */
+  IsPromise,
+  /* RejectPromise, */
+  /* TriggerPromiseReactions, */
+  /* HostPromiseRejectionTracker, */
   CreateHTML
 };
 

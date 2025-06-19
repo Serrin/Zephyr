@@ -24,8 +24,8 @@ body { max-width: 800px; margin: 0 auto; }
 
 <p><b>Collection of the ECMAScript abstract methods as standalone Javascript functions and a library with zero dependencies.</b></p>
 
-<p>Latest version: 0.1.6</p>
-<p>Date: 2025-06-17T19:17:13.681Z</p>
+<p>Latest version: 0.1.7</p>
+<p>Date: 2025-06-19T23:44:54.243Z</p>
 
 
 <p><b>Tested on these browsers:</b></p>
@@ -54,8 +54,8 @@ body { max-width: 800px; margin: 0 auto; }
     <td><b>Changes</b></td>
   </tr>
   <tr>
-    <td>0.0.1 - 0.09</td>
-    <td>collect functions</td>
+    <td>0.0.1 - 0.0.9</td>
+    <td>fixes and new functions</td>
   </tr>
   <tr>
     <td>0.1.0</td>
@@ -70,19 +70,7 @@ body { max-width: 800px; margin: 0 auto; }
     <td>added the documentation</td>
   </tr>
   <tr>
-    <td>0.1.3</td>
-    <td>fixes and new functions</td>
-  </tr>
-  <tr>
-    <td>0.1.4</td>
-    <td>fixes and new functions</td>
-  </tr>
-  <tr>
-    <td>0.1.5</td>
-    <td>added more documentation</td>
-  </tr>
-  <tr>
-    <td>0.1.6</td>
+    <td>0.1.3 - 0.1.7</td>
     <td>fixes and new functions</td>
   </tr>
 </table>
@@ -191,6 +179,12 @@ window.HasProperty = HasProperty;
   </tr>
   <tr>
     <td>noConflict();</td>
+    <td></td>
+    <td></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>IsObject(value);</td>
     <td></td>
     <td></td>
     <td><span class="success">DONE</span></td>
@@ -733,7 +727,7 @@ window.HasProperty = HasProperty;
     <td>SetterThatIgnoresPrototypeProperties();</td>
     <td></td>
     <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-SetterThatIgnoresPrototypeProperties">Link</a></td>
-    <td><span class="warning">TODO</span></td>
+    <td><span class="success">DONE</span></td>
   </tr>
   <tr>
     <td>GetIteratorDirect();</td>
@@ -823,6 +817,30 @@ window.HasProperty = HasProperty;
     <td>IteratorToList();</td>
     <td><a target="_blank" href="https://262.ecma-international.org/#sec-iteratortolist">Link</a></td>
     <td><a target="_blank" href="https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratortolist">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ClearKeptObjects();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-clear-kept-objects">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-clear-kept-objects">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>AddToKeptObjects();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-addtokeptobjects">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-addtokeptobjects">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>CleanupFinalizationRegistry();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-cleanup-finalization-registry">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-cleanup-finalization-registry">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>CanBeHeldWeakly();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-canbeheldweakly">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-canbeheldweakly">Link</a></td>
     <td><span class="success">DONE</span></td>
   </tr>
   <tr>
@@ -1144,6 +1162,30 @@ window.HasProperty = HasProperty;
     <td><span class="success">DONE</span></td>
   </tr>
   <tr>
+    <td>TypedArrayCreateFromConstructor();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-typedarraycreatefromconstructor">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-typedarraycreatefromconstructor">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>TypedArraySpeciesCreate();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#typedarray-species-create">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#typedarray-species-create">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>TypedArrayCreateSameType();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-typedarray-create-same-type">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-typedarray-create-same-type">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>ValidateTypedArray();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-validatetypedarray">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-validatetypedarray">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
     <td>TypedArrayElementSize();</td>
     <td><a target="_blank" href="https://262.ecma-international.org/#sec-typedarrayelementsize">Link</a></td>
     <td><a target="_blank" href="https://tc39.es/ecma262/multipage/indexed-collections.html#sec-abstract-operations-for-typedarray-objects">Link</a></td>
@@ -1174,9 +1216,39 @@ window.HasProperty = HasProperty;
     <td><span class="success">DONE</span></td>
   </tr>
   <tr>
+    <td>GetSetRecord();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/keyed-collections.html#sec-getsetrecord">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>SetDataHas();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/#sec-setdatahas">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>SetDataIndex();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/keyed-collections.html#sec-setdataindex">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>SetDataSize();</td>
+    <td></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/keyed-collections.html#sec-setdatasize">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
     <td>CreateSetIterator();</td>
     <td><a target="_blank" href="https://262.ecma-international.org/#sec-createsetiterator">Link</a></td>
     <td><a target="_blank" href="https://tc39.es/ecma262/multipage/keyed-collections.html#sec-createsetiterator">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>WeakRefDeref();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-weakref-abstract-operations">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/managing-memory.html#sec-weakrefderef">Link</a></td>
     <td><span class="success">DONE</span></td>
   </tr>
   <tr>
@@ -1195,6 +1267,48 @@ window.HasProperty = HasProperty;
     <td>AsyncFromSyncIteratorContinuation();</td>
     <td><a target="_blank" href="https://262.ecma-international.org/#sec-asyncfromsynciteratorcontinuation">Link</a></td>
     <td><a target="_blank" href="https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-asyncfromsynciteratorcontinuation">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>CreateResolvingFunctions();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-createresolvingfunctions">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-createresolvingfunctions">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>FulfillPromise();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-fulfillpromise">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-fulfillpromise">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>NewPromiseCapability();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-newpromisecapability">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-newpromisecapability">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>IsPromise();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-ispromise">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-ispromise">Link</a></td>
+    <td><span class="success">DONE</span></td>
+  </tr>
+  <tr>
+    <td>RejectPromise();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-rejectpromise">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-rejectpromise">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>TriggerPromiseReactions();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-triggerpromisereactions">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-triggerpromisereactions">Link</a></td>
+    <td><span class="warning">TODO</span></td>
+  </tr>
+  <tr>
+    <td>HostPromiseRejectionTracker();</td>
+    <td><a target="_blank" href="https://262.ecma-international.org/#sec-host-promise-rejection-tracker">Link</a></td>
+    <td><a target="_blank" href="https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-host-promise-rejection-tracker">Link</a></td>
     <td><span class="warning">TODO</span></td>
   </tr>
   <tr>
