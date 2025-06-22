@@ -5,9 +5,9 @@
 
 __Collection of the ECMAScript abstract methods as standalone Javascript functions and a library with zero dependencies.__
 
-Latest version: 0.1.7
+Latest version: 0.1.8
 
-Date: 2025-06-19T23:44:54.243Z
+Date: 2025-06-22T16:25:04.436Z
 
 __Tested on these browsers:__
 
@@ -35,7 +35,7 @@ Version       | Changes
 0.1.0         | added the min file, first public version
 0.1.1         | added the esm file
 0.1.2         | added the documentation
-0.1.3 - 0.1.7 | fixes and new functions
+0.1.3 - 0.1.8 | fixes and new functions
 
 
 ### Editions
@@ -202,8 +202,8 @@ IteratorValue();|[Link](https://262.ecma-international.org/#sec-iteratorvalue)|[
 IteratorStep();|[Link](https://262.ecma-international.org/#sec-iteratorstep)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstep)|__DONE__
 IteratorStepValue();|[Link](https://262.ecma-international.org/#sec-iteratorstepvalue)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorstepvalue)|__DONE__
 IteratorClose();|[Link](https://262.ecma-international.org/#sec-iteratorclose)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratorclose)|__DONE__
-IfAbruptCloseIterator();|[Link](https://262.ecma-international.org/#sec-ifabruptcloseiterator)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-ifabruptcloseiterator)|TODO
-AsyncIteratorClose();|[Link](https://262.ecma-international.org/#sec-asynciteratorclose)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-asynciteratorclose)|TODO
+IfAbruptCloseIterator();|[Link](https://262.ecma-international.org/#sec-ifabruptcloseiterator)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-ifabruptcloseiterator)|__DONE__
+AsyncIteratorClose();|[Link](https://262.ecma-international.org/#sec-asynciteratorclose)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-asynciteratorclose)|__DONE__
 CreateIteratorResultObject();|[Link](https://262.ecma-international.org/#sec-createiterresultobject)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createiterresultobject)|__DONE__
 CreateListIteratorRecord();|[Link](https://262.ecma-international.org/#sec-createlistiteratorRecord)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createlistiteratorRecord)|__DONE__
 IteratorToList();|[Link](https://262.ecma-international.org/#sec-iteratortolist)|[Link](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iteratortolist)|__DONE__

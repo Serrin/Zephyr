@@ -37,7 +37,6 @@ function getReadableJSON (value, space) {
   return JSON.stringify(value, JSONreplacer, space);
 }
 
-
 /** classes **/
 
 

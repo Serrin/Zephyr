@@ -1,6 +1,6 @@
 /**
  * @name Zephyr
- * @version 0.1.7 dev
+ * @version 0.1.8 dev
  * @see https://github.com/Serrin/
  * @license MIT https://opensource.org/licenses/MIT
  */
@@ -12,26 +12,28 @@
 
 
 /* Number.MIN_SAFE_INTEGER; */
-if(!("MIN_SAFE_INTEGER" in Number)){Number.MIN_SAFE_INTEGER=-9007199254740991;}
+if(!("MIN_SAFE_INTEGER" in Number)) {
+  Number.MIN_SAFE_INTEGER = -9007199254740991;
+}
 
 
 /* Number.MAX_SAFE_INTEGER; */
-if(!("MAX_SAFE_INTEGER" in Number)){Number.MAX_SAFE_INTEGER=9007199254740991;}
+if(!("MAX_SAFE_INTEGER" in Number)) {
+  Number.MAX_SAFE_INTEGER = 9007199254740991;
+}
+
 
 /* Number.isInteger(); */
-Number.isInteger = Number.isInteger || function(value) {
-  return typeof value === "number"
-    && isFinite(value)
-    && Math.floor(value) === value;
+Number.isInteger = Number.isInteger || function (v) {
+  return typeof v === "number" && isFinite(v) && Math.floor(v) === v;
 };
 
 
 /* Object.is(); SameValue */
-if (!Object.is) {
-  Object.is = function (x, y) {
-    if (x===y) { return x!==0 || 1/x === 1/y; } else { return x!==x && y!==y; }
-  };
+if (!Object.is) { Object.is =
+  ((x, y) => ((x === y) ? (x !== 0 || 1/x === 1/y) : (x !== x && y !== y)));
 }
+
 
 /* Object.hasOwn(); */
 Object.hasOwn=Object.hasOwn||((O,P)=>Object.prototype.hasOwnProperty.call(O,P));
@@ -100,8 +102,8 @@ https://262.ecma-international.org/#sec-normalcompletion
 https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-normalcompletion
 6.2.4.1 NormalCompletion ( value )
 */
-const NormalCompletion = (value) =>
-  ({"[[Type]]": "NORMAL", "[[Value]]": value, "[[Target]]": undefined});
+const NormalCompletion = (v) =>
+  ({"[[Type]]": "NORMAL", "[[Value]]": v, "[[Target]]": undefined});
 
 
 /*
@@ -110,8 +112,8 @@ https://262.ecma-international.org/#sec-throwcompletion
 https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-throwcompletion
 6.2.4.2 ThrowCompletion ( value )
 */
-const ThrowCompletion = (value) =>
-  ({"[[Type]]": "THROW", "[[Value]]": value, "[[Target]]": undefined});
+const ThrowCompletion = (v) =>
+  ({"[[Type]]": "THROW", "[[Value]]": v, "[[Target]]": undefined});
 
 
 /*
@@ -120,8 +122,8 @@ NONE
 https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-returncompletion
 6.2.4.3 ReturnCompletion ( value )
 */
-const ReturnCompletion = (value) =>
-  ({"[[Type]]": "RETURN", "[[Value]]": value, "[[Target]]": undefined});
+const ReturnCompletion = (v) =>
+  ({"[[Type]]": "RETURN", "[[Value]]": v, "[[Target]]": undefined});
 
 /*
 https://262.ecma-international.org/#sec-updateempty
@@ -239,7 +241,9 @@ function ToPrimitive (O, hint = "default") {
       }
     }
   }
-  throw new TypeError("ToPrimitive(); error: Cannot convert object to primitive value");
+  throw new TypeError(
+    "ToPrimitive(); error: Cannot convert object to primitive value"
+  );
 }
 
 
@@ -272,7 +276,7 @@ https://262.ecma-international.org/#sec-toboolean
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-toboolean
 7.1.2 ToBoolean ( argument )
 */
-const ToBoolean = (argument) => Boolean(argument);
+const ToBoolean = (v) => Boolean(v);
 
 
 /*
@@ -281,11 +285,11 @@ https://262.ecma-international.org/#sec-tonumeric
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-tonumeric
 7.1.3 ToNumeric ( value )/
 */
-function ToNumeric (value) {
-  var type = ((value === null) ? "null" : (typeof value));
-  if (type === "bigint" || type === "number") { return value; }
-  if (type === "symbol") { throw new TypeError("Symbol: " + value); }
-  return +value;
+function ToNumeric (v) {
+  var type = ((v === null) ? "null" : (typeof v));
+  if (type === "bigint" || type === "number") { return v; }
+  if (type === "symbol") { throw new TypeError("Symbol: " + v); }
+  return +v;
 }
 
 
@@ -296,7 +300,7 @@ https://tc39.es/ecma262/#sec-tonumber
 7.1.4 ToNumber ( argument )
 */
 /* not "Number(argument);", because argument cannot be BigInt -> throw error */
-const ToNumber = (argument) => +argument;
+const ToNumber = (v) => +v;
 
 
 /*
@@ -305,7 +309,7 @@ https://262.ecma-international.org/#sec-tonumber-applied-to-the-string-type
 https://tc39.es/ecma262/#sec-stringtonumber
 7.1.4.1.1 StringToNumber ( str )
 */
-const StringToNumber = (str) => +str;
+const StringToNumber = (v) => +v;
 
 
 /*
@@ -314,10 +318,8 @@ https://262.ecma-international.org/#sec-tointegerorinfinity
 https://tc39.es/ecma262/#sec-tointegerorinfinity
 7.1.5 ToIntegerOrInfinity ( argument )
 */
-function ToIntegerOrInfinity (argument) {
-  let v = Math.trunc(+argument);
-  return (v !== v || v === 0) ? 0 : v;
-}
+const ToIntegerOrInfinity = (v) =>
+  ((v = Math.trunc(+v)) !== v || v === 0) ? 0 : v;
 
 
 /*
@@ -326,9 +328,9 @@ https://262.ecma-international.org/#sec-toint32
 https://tc39.es/ecma262/#sec-toint32
 7.1.6 ToInt32 ( argument )
 */
-const ToInt32 = (argument) =>
-  ((argument = Math.min(Math.max(-2147483648, Math.trunc(+argument)),
-    2147483647)) === argument) ? argument : 0;
+const ToInt32 = (v) =>
+  ((v = Math.min(Math.max(-2147483648, Math.trunc(+v)), 2147483647)) === v)
+    ? v : 0;
 
 
 /*
@@ -337,9 +339,8 @@ https://262.ecma-international.org/#sec-touint32
 https://tc39.es/ecma262/#sec-touint32
 7.1.7 ToUint32 ( argument )
 */
-const ToUint32 = (argument) =>
-  ((argument = Math.min(Math.max(0, Math.trunc(+argument)), 4294967295))
-    === argument) ? argument :0;
+const ToUint32 = (v) =>
+  ((v = Math.min(Math.max(0, Math.trunc(+v)), 4294967295)) === v) ? v : 0;
 
 
 /*
@@ -348,9 +349,8 @@ https://262.ecma-international.org/#sec-toint16
 https://tc39.es/ecma262/#sec-toint16
 7.1.8 ToInt16 ( argument )
 */
-const ToInt16 = (argument) =>
-  ((argument = Math.min(Math.max(-32768, Math.trunc(+argument)), 32767))
-    === argument) ? argument :0;
+const ToInt16 = (v) =>
+  ((v = Math.min(Math.max(-32768, Math.trunc(+v)), 32767)) === v) ? v : 0;
 
 
 /*
@@ -359,9 +359,8 @@ https://262.ecma-international.org/#sec-touint16
 https://tc39.es/ecma262/#sec-touint16
 7.1.9 ToUint16 ( argument )
 */
-const ToUint16 = (argument) =>
-  ((argument = Math.min(Math.max(0, Math.trunc(+argument)), 65535))
-    === argument) ? argument : 0;
+const ToUint16 = (v) =>
+  ((v = Math.min(Math.max(0, Math.trunc(+v)), 65535)) === v) ? v : 0;
 
 
 /*
@@ -370,9 +369,8 @@ https://262.ecma-international.org/#sec-toint8
 https://tc39.es/ecma262/#sec-toint8
 7.1.10 ToInt8 ( argument )
 */
-const ToInt8 = (argument) =>
-  ((argument = Math.min(Math.max(-128, Math.trunc(+argument)), 127))
-    === argument) ? argument : 0;
+const ToInt8 = (v) =>
+  ((v = Math.min(Math.max(-128, Math.trunc(+v)), 127)) === v) ? v : 0;
 
 
 /*
@@ -381,9 +379,8 @@ https://262.ecma-international.org/#sec-touint8
 https://tc39.es/ecma262/#sec-touint8
 7.1.11 ToUint8 ( argument )
 */
-const ToUint8 = (argument) =>
-  ((argument = Math.min(Math.max(0, Math.trunc(+argument)), 255))
-    === argument) ? argument : 0;
+const ToUint8 = (v) =>
+  ((v = Math.min(Math.max(0, Math.trunc(+v)), 255)) === v) ? v : 0;
 
 
 /*
@@ -392,9 +389,8 @@ https://262.ecma-international.org/#sec-touint8clamp
 https://tc39.es/ecma262/#sec-touint8clamp
 7.1.12 ToUint8Clamp ( argument )
 */
-const ToUint8Clamp = (argument) =>
-  ((argument = Math.min(Math.max(0, Math.trunc(+argument)), 255))
-    === argument) ? argument : 0;
+const ToUint8Clamp = (v) =>
+  ((v = Math.min(Math.max(0, Math.trunc(+v)), 255)) === v) ? v : 0;
 
 
 /*
@@ -403,7 +399,7 @@ https://262.ecma-international.org/#sec-tobigint
 https://tc39.es/ecma262/#sec-tobigint
 7.1.13 ToBigInt ( argument )
 */
-const ToBigInt = (argument) => BigInt(argument);
+const ToBigInt = (v) => BigInt(v);
 
 
 /*
@@ -412,7 +408,7 @@ https://262.ecma-international.org/#sec-stringtobigint
 https://tc39.es/ecma262/#sec-stringtobigint
 7.1.14 StringToBigInt ( str )
 */
-const StringToBigInt = (str) => BigInt(str);
+const StringToBigInt = (v) => BigInt(v);
 
 
 /*
@@ -421,7 +417,7 @@ https://262.ecma-international.org/#sec-tobigint64
 https://tc39.es/ecma262/#sec-tobigint64
 7.1.15 ToBigInt64 ( argument )
 */
-const ToBigInt64 = (argument) => BigInt(argument);
+const ToBigInt64 = (v) => BigInt(v);
 
 
 /*
@@ -430,11 +426,10 @@ https://262.ecma-international.org/#sec-tobiguint64
 https://tc39.es/ecma262/#sec-tobiguint64
 7.1.16 ToBigUint64 ( argument )
 */
-const ToBigUint64 = (argument) => BigInt(typeof argument === "bigint"
-  ? (argument > Math.pow(2, 64) - 1 ? Math.pow(2, 64) - 1 : argument < 0 ? 0
-    : argument)
-  : ((argument=Math.min(Math.max(0, Math.trunc(Number(argument))),
-    Math.pow(2,64) -1)) === argument) ? argument : 0
+const ToBigUint64 = (v) => BigInt(typeof v === "bigint"
+  ? (v > Math.pow(2, 64) - 1 ? Math.pow(2, 64) - 1 : v < 0 ? 0 : v)
+  : ((v=Math.min(Math.max(0, Math.trunc(Number(v))),
+    Math.pow(2,64) -1)) === v) ? v : 0
 );
 
 
@@ -444,7 +439,7 @@ https://262.ecma-international.org/#sec-tostring
 https://tc39.es/ecma262/#sec-tostring
 7.1.17 ToString ( argument )
 */
-const ToString = (argument) => String(argument);
+const ToString = (v) => String(v);
 
 
 /*
@@ -466,8 +461,7 @@ https://262.ecma-international.org/#sec-topropertykey
 https://tc39.es/ecma262/#sec-topropertykey
 7.1.19 ToPropertyKey ( argument )
 */
-const ToPropertyKey = (argument) =>
-  (typeof argument === "symbol"? argument : String(argument));
+const ToPropertyKey = (v) => (typeof v === "symbol"? v : String(v));
 
 
 /*
@@ -476,11 +470,11 @@ https://262.ecma-international.org/#sec-tolength
 https://tc39.es/ecma262/#sec-tolength
 7.1.20 ToLength ( argument )
 */
-function ToLength (argument) {
-  let v = Math.trunc(+argument);
-  v = ((v !== v || v === 0) ? 0 : v);
+function ToLength (v) {
+  v = ((v = Math.trunc(+v)) !== v || v === 0) ? 0 : v;
   return Math.min(Math.max(v, 0), Math.pow(2, 53) - 1);
 }
+
 
 /*
 https://262.ecma-international.org/#sec-canonicalnumericindexstring
@@ -488,10 +482,10 @@ https://262.ecma-international.org/#sec-canonicalnumericindexstring
 https://tc39.es/ecma262/#sec-canonicalnumericindexstring
 7.1.21 CanonicalNumericIndexString ( argument )
 */
-function CanonicalNumericIndexString (argument) {
-  if (typeof argument === "number" && 1/argument === -Infinity) { return -0; }
-  let n = +argument;
-  if (String(n) === argument) { return n; }
+function CanonicalNumericIndexString (v) {
+  if (typeof v === "number" && 1/v === -Infinity) { return -0; }
+  let n = +v;
+  if (String(n) === v) { return n; }
 }
 
 
@@ -501,11 +495,11 @@ https://262.ecma-international.org/#sec-requireobjectcoercible
 https://tc39.es/ecma262/
 NONE
 */
-function RequireObjectCoercible (argument) {
-  if (argument == null) { throw new TypeError(
-    Object.prototype.toString.call(argument) + " is not coercible to Object.");
+function RequireObjectCoercible (v) {
+  if (v == null) { throw new TypeError(
+    Object.prototype.toString.call(v) + " is not coercible to Object.");
   }
-  return argument;
+  return v;
 }
 
 
@@ -515,9 +509,8 @@ https://262.ecma-international.org/#sec-toindex
 https://tc39.es/ecma262/#sec-toindex
 7.1.22 ToIndex ( value )
 */
-function ToIndex (argument) {
-  let v = Math.trunc(+argument);
-  if (v !== v || v === 0) { return 0; }
+function ToIndex (v) {
+  v = ((v = Math.trunc(+v)) !== v || v === 0) ? 0 : v;
   if (v < 0 || v > (Math.pow(2, 53) - 1)) {
     throw new RangeError("ToIndex(); RangeError: " + v);
   }
@@ -542,9 +535,9 @@ https://tc39.es/ecma262/multipage/abstract-operations.html#sec-iscallable
 7.2.3 IsCallable ( argument )
 */
 /* const IsCallable = (argument) => (typeof O === "function"); */
-const IsCallable = (argument) =>
-  ((argument != null && ["object", "function"].includes(typeof argument))
-    ? (typeof argument.call === "function") : false);
+const IsCallable = (v) =>
+  ((v != null && ["object", "function"].includes(typeof v))
+    ? (typeof v.call === "function") : false);
 
 
 /*
@@ -553,8 +546,8 @@ https://262.ecma-international.org/#sec-isconstructor
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-isconstructor
 7.2.4 IsConstructor ( argument )
 */
-const IsConstructor = (argument) => (
-  typeof argument === "function" && typeof argument.prototype === "object"
+const IsConstructor = (v) => (
+  typeof v === "function" && typeof v.prototype === "object"
 );
 
 
@@ -573,10 +566,8 @@ https://262.ecma-international.org/#sec-isintegralnumber
 https://tc39.es/ecma262/multipage/abstract-operations.html
 NONE
 */
-const IsIntegralNumber = Number.isInteger || function (argument) {
-  return typeof argument === "number"
-    && isFinite(argument)
-    && Math.floor(argument) === argument;
+const IsIntegralNumber = Number.isInteger || function (v) {
+  return typeof v === "number" && isFinite(v) && Math.floor(v) === v;
 };
 
 
@@ -586,7 +577,7 @@ https://262.ecma-international.org/#sec-isregexp
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-isregexp
 7.2.6 IsRegExp ( argument )
 */
-const IsRegExp = (argument) => (argument instanceof RegExp);
+const IsRegExp = (v) => (v instanceof RegExp);
 
 
 /*
@@ -798,7 +789,9 @@ https://tc39.es/ecma262/#sec-definepropertyorthrow
 */
 function DeletePropertyOrThrow (O, P) {
   delete O[P];
-  if (P in O) { throw new Error("Object Property delete error: "+O+"["+P+"]"); }
+  if (P in O) {
+    throw new Error("Object Property delete error: " + O + "[" + P + "]");
+  }
 }
 
 
@@ -907,14 +900,10 @@ https://262.ecma-international.org/#sec-lengthofarraylike
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-lengthofarraylike
 7.3.18 LengthOfArrayLike ( obj )
 */
-function LengthOfArrayLike (obj) {
-  /* ToIntegerOrInfinity begin */
-  let v = +obj.length;
-  if (1/v === Infinity || 1/v === -Infinity || v !== v) { v = 0; }
-  let len = ((v === Infinity || v === -Infinity) ? v : Math.trunc(v));
-  /* ToIntegerOrInfinity end */
-  if (len < 0) { return 0; }
-  return Math.min(len, Math.pow(2, 53) - 1);
+function LengthOfArrayLike (O) {
+  let v = Math.trunc(+O.length);
+  v = ((v !== v || v === 0) ? 0 : v);
+  return Math.min(Math.max(v, 0), Math.pow(2, 53) - 1);
 }
 
 
@@ -1255,8 +1244,8 @@ NONE
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratordirect
 7.4.2 GetIteratorDirect ( obj )
 */
-const GetIteratorDirect = (obj) =>
-  ({"[[Iterator]]": obj, "[[NextMethod]]": obj.next, "[[Done]]": false});
+const GetIteratorDirect = (O) =>
+  ({"[[Iterator]]": O, "[[NextMethod]]": O.next, "[[Done]]": false});
 
 
 /*
@@ -1265,8 +1254,8 @@ https://262.ecma-international.org/#sec-getiteratorfrommethod
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratorfrommethod
 7.4.3 GetIteratorFromMethod ( obj, method )
 */
-function GetIteratorFromMethod (obj, method) {
-  let iterator = Reflect.apply(method, obj, []);
+function GetIteratorFromMethod (O, method) {
+  let iterator = Reflect.apply(method, O, []);
   if (((iterator === null) ? "null" : (typeof iterator)) !== "object") {
     throw new TypeError();
   }
@@ -1284,30 +1273,30 @@ https://262.ecma-international.org/#sec-getiterator
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiterator
 7.4.4 GetIterator ( obj, kind )
 */
-function GetIterator(obj, kind) {
+function GetIterator (O, kind) {
   async function* createAsyncIterable(syncIterable) {
     for (const item of syncIterable) { yield item; }
   }
   let iterator;
   if (kind === "ASYNC") { /* ASYNC */
-    if (obj[Symbol.asyncIterator] === undefined
-      && obj[Symbol.iterator] === undefined) {
+    if (O[Symbol.asyncIterator] === undefined
+      && O[Symbol.iterator] === undefined) {
       throw new TypeError(
-        "GetIterator(); Error: " + obj + " is not sync/async iterable"
+        "GetIterator(); Error: " + O + " is not sync/async iterable"
       );
-    }    if (obj[Symbol.asyncIterator] !== undefined) {
-      iterator = obj[Symbol.asyncIterator]();
+    }    if (O[Symbol.asyncIterator] !== undefined) {
+      iterator = O[Symbol.asyncIterator]();
     }
-    if (obj[Symbol.asyncIterator] === undefined
-    && obj[Symbol.iterator] !== undefined) {
-      iterator = createAsyncIterable(obj);
+    if (O[Symbol.asyncIterator] === undefined
+    && O[Symbol.iterator] !== undefined) {
+      iterator = createAsyncIterable(O);
     }
   } else { /* SYNC */
-    if (obj[Symbol.iterator] === undefined) {
+    if (O[Symbol.iterator] === undefined) {
       throw new TypeError(
-        "GetIterator(); Error: " + obj + " is not sync iterable");
+        "GetIterator(); Error: " + O + " is not sync iterable");
     }
-    iterator = obj[Symbol.iterator]();
+    iterator = O[Symbol.iterator]();
   }
   if (((iterator === null) ? "null" : (typeof iterator)) !== "object") {
     throw new TypeError("GetIterator(); Error: iterator");
@@ -1326,25 +1315,25 @@ NONE
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-getiteratorflattenable
 7.4.5 GetIteratorFlattenable ( obj, primitiveHandling )
 */
-function GetIteratorFlattenable ( obj, primitiveHandling ) {
+function GetIteratorFlattenable (O, primitiveHandling) {
   const Type = (O) => (O === null ? "null" : typeof O);
-  if (Type(obj) !== "object") {
+  if (Type(O) !== "object") {
     if (primitiveHandling === "REJECT-PRIMITIVES") {
       throw new TypeError(
-        "GetIteratorFlattenable(); TypeError: " + obj + " is not an object"
+        "GetIteratorFlattenable(); TypeError: " + O + " is not an object"
       );
     }
     if (primitiveHandling === "ITERATE-STRING-PRIMITIVES"
-      && typeof obj !== "string") {
+      && typeof O !== "string") {
       throw new TypeError(
-        "GetIteratorFlattenable(); TypeError: " + obj + " is not a string"
+        "GetIteratorFlattenable(); TypeError: " + O + " is not a string"
       );
     }
   }
-  if (obj[Symbol.iterator] === undefined) {
-    var iterator = obj;
+  if (O[Symbol.iterator] === undefined) {
+    var iterator = O;
   } else {
-    var iterator = obj[Symbol.iterator]();
+    var iterator = O[Symbol.iterator]();
   }
   if (Type(iterator) !== "object") {
     throw new TypeError(
@@ -1554,8 +1543,70 @@ https://262.ecma-international.org/#sec-ifabruptcloseiterator
 7.4.10 IfAbruptCloseIterator ( value, iteratorRecord )
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-ifabruptcloseiterator
 7.4.12 IfAbruptCloseIterator ( value, iteratorRecord )
-TODO
 */
+function IfAbruptCloseIterator (value, iteratorRecord) {
+  function Completion (completionRecord) {
+    if (completionRecord != null && typeof completionRecord === "object") {
+      let crKeys = Object.keys(completionRecord);
+      if (crKeys.length === 3
+        && crKeys.includes("[[Type]]")
+        && crKeys.includes("[[Value]]")
+        && crKeys.includes("[[Target]]")) {
+          return completionRecord;
+        }
+    }
+    throw new TypeError(
+      "Completion(); TypeError: completionRecord is not a Completion Record"
+    );
+  }
+  function IteratorClose (iteratorRecord, completion) {
+    function GetMethod (O, P) {
+      let func = O[P];
+      if (func == null) { return undefined; }
+      if (typeof func !== "function") {
+        throw new TypeError("Method not callable: " + P);
+      }
+      return func;
+    }
+    function Completion (completionRecord) {
+      if (completionRecord != null && typeof completionRecord === "object") {
+        let crKeys = Object.keys(completionRecord);
+        if (crKeys.length === 3
+          && crKeys.includes("[[Type]]")
+          && crKeys.includes("[[Value]]")
+          && crKeys.includes("[[Target]]")) {
+            return completionRecord;
+        }
+      }
+      throw new TypeError(
+        "Completion(); TypeError: completionRecord is not a Completion Record"
+      );
+    }
+    let iterator = iteratorRecord["[[Iterator]]"];
+    if (iterator == null || typeof iterator !== "object") {
+      throw new TypeError(
+        "IteratorClose(); TypeError: iterator have to be an object"
+      );
+    }
+    let innerReturn = GetMethod(iterator, "return");
+    if (innerReturn === undefined) { return Completion(completion); }
+    let innerResult = Reflect.apply(innerReturn, iterator, []);
+    if (completion["[[Type]]"] === "THROW") { return completion; }
+    if (innerResult["[[Type]]"] === "THROW") { return innerResult; }
+    if (innerResult == null || typeof innerResult !== "object") {
+      throw new TypeError(
+        "Completion(); TypeError: iterator return function return value is not an object"
+      );
+    }
+    return Completion(completion);
+  }
+  Completion(value);
+  if (value["[[Type]]"] !== "NORMAL") {
+    return IteratorClose(iteratorRecord, value);
+  } else {
+    value = value;
+  }
+}
 
 
 /*
@@ -1563,8 +1614,48 @@ https://262.ecma-international.org/#sec-asynciteratorclose
 7.4.11 AsyncIteratorClose ( iteratorRecord, completion )
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-asynciteratorclose
 7.4.13 AsyncIteratorClose ( iteratorRecord, completion )
-TODO
 */
+function AsyncIteratorClose (iteratorRecord, completion) {
+  function GetMethod (O, P) {
+    let func = O[P];
+    if (func == null) { return undefined; }
+    if (typeof func !== "function") {
+      throw new TypeError("Method not callable: " + P);
+    }
+    return func;
+  }
+  function Completion (completionRecord) {
+    if (completionRecord != null && typeof completionRecord === "object") {
+      let crKeys = Object.keys(completionRecord);
+      if (crKeys.length === 3
+        && crKeys.includes("[[Type]]")
+        && crKeys.includes("[[Value]]")
+        && crKeys.includes("[[Target]]")) {
+          return completionRecord;
+      }
+    }
+    throw new TypeError(
+      "Completion(); TypeError: completionRecord is not a Completion Record"
+    );
+  }
+  let iterator = iteratorRecord["[[Iterator]]"];
+  if (iterator == null || typeof iterator !== "object") {
+    throw new TypeError(
+      "AsyncIteratorClose(); TypeError: iterator have to be an object"
+    );
+  }
+  let innerReturn = GetMethod(iterator, "return");
+  if (innerReturn === undefined) { return Completion(completion); }
+  let innerResult = Reflect.apply(innerReturn, iterator, []);
+  if (completion["[[Type]]"] === "THROW") { return completion; }
+  if (innerResult["[[Type]]"] === "THROW") { return innerResult; }
+  if (innerResult == null || typeof innerResult !== "object") {
+    throw new TypeError(
+      "Completion(); TypeError: iterator return function return value is not an object"
+    );
+  }
+  return Completion(completion);
+}
 
 
 /*
@@ -1573,8 +1664,7 @@ https://262.ecma-international.org/#sec-createiterresultobject
 https://tc39.es/ecma262/multipage/abstract-operations.html#sec-createiterresultobject
 7.4.14 CreateIteratorResultObject ( value, done )
 */
-const CreateIteratorResultObject =
-  (value, done) => ({"value": value, "done": done});
+const CreateIteratorResultObject = (v, done) => ({"value": v, "done": done});
 
 
 /*
@@ -1971,19 +2061,11 @@ https://262.ecma-international.org/#sec-stringcreate
 https://tc39.es/ecma262/#sec-stringcreate
 10.4.3.4 StringCreate ( value, prototype )
 */
-function StringCreate (value, prototype) {
-  if (typeof value !== "string") {
+function StringCreate (v, Prototype) {
+  if (typeof v !== "string") {
     throw new TypeError("StringCreate(); error");
   }
-  return value.slice();
-  /*
-  var S = value;
-  if (prototype !== String.Prototype) { Object.setPrototypeOf(S, prototype); }
-  Object.defineProperty(S, "length", {
-    writable: false, enumerable: false, configurable: true, value: value.length
-  });
-  return S;
-  */
+  return v.slice();
 }
 
 
@@ -2055,7 +2137,8 @@ function TypedArrayByteLength (taRecord) {
     if (O instanceof Float32Array) { return 4; }
     if (O instanceof Float64Array) { return 8; }
   }
-  return TypedArrayElementSize(taRecord) * taRecord.length;
+  return TypedArrayElementSize(taRecord["[[Object]]"])
+    * taRecord["[[Object]]"].length;
 }
 
 
@@ -2065,7 +2148,7 @@ https://262.ecma-international.org/#sec-typedarraylength
 https://tc39.es/ecma262/#sec-typedarraylength
 10.4.5.13 TypedArrayLength ( taRecord )
 */
-const TypedArrayLength = (taRecord) => taRecord["length"];
+const TypedArrayLength = (taRecord) => taRecord["[[Object]]"]["length"];
 
 
 /*
@@ -2234,7 +2317,7 @@ https://262.ecma-international.org/#sec-stringtocodepoints
 https://tc39.es/ecma262/multipage/ecmascript-language-source-code.html#sec-stringtocodepoints
 11.1.5 Static Semantics: StringToCodePoints ( string )
 */
-const StringToCodePoints = (string) => Array.from(string, (v) => v.codePointAt(0) );
+const StringToCodePoints = (str) => Array.from(str, (v) => v.codePointAt(0) );
 
 
 /*
@@ -2289,13 +2372,13 @@ https://262.ecma-international.org/#sec-numbertobigint
 https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-numbertobigint
 21.2.1.1.1 NumberToBigInt ( number )
 */
-function NumberToBigInt (number) {
-  if (typeof number !== "number" || !Number.isSafeInteger(number)) {
+function NumberToBigInt (v) {
+  if (typeof v !== "number" || !Number.isSafeInteger(v)) {
     throw new RangeError(
       "NumberToBigInt(); RangeError: number is not an integer"
     );
   }
-  return number;
+  return v;
 }
 
 /*
@@ -2367,8 +2450,12 @@ https://262.ecma-international.org/#sec-flattenintoarray
 https://tc39.es/ecma262/multipage/indexed-collections.html#sec-flattenintoarray
 23.1.3.13.1 FlattenIntoArray ( target, source, sourceLen, start, depth [ , mapperFunction [ , thisArg ] ] )
 */
-function FlattenIntoArray (target, source, sourceLen, start, depth, mapperFunction, thisArg) {
-  function _FlattenIntoArray(target, source, sourceLen, start, depth, mapperFunction, thisArg) {
+function FlattenIntoArray (
+    target, source, sourceLen, start, depth, mapperFunction, thisArg
+  ) {
+  function _FlattenIntoArray(
+      target, source, sourceLen, start, depth, mapperFunction, thisArg
+    ) {
     function ToLength (argument) {
       /* ToIntegerOrInfinity begin */
       let v = +argument;
@@ -2480,8 +2567,8 @@ https://262.ecma-international.org/#typedarray-species-create
 https://tc39.es/ecma262/multipage/indexed-collections.html#typedarray-species-create
 23.2.4.1 TypedArraySpeciesCreate ( exemplar, argumentList )
 */
-const TypedArraySpeciesCreate = (constructor, argumentList) =>
-  Reflect.construct(constructor, argumentList);
+const TypedArraySpeciesCreate = (exemplar, argumentList) =>
+  Reflect.construct(Object.getPrototypeOf(exemplar).constructor, argumentList);
 
 
 /*
@@ -2502,7 +2589,6 @@ https://tc39.es/ecma262/multipage/indexed-collections.html#sec-typedarray-create
 */
 const TypedArrayCreateSameType = (exemplar, argumentList) =>
   Reflect.construct(Object.getPrototypeOf(exemplar).constructor, argumentList);
-
 
 
 /*
@@ -2882,7 +2968,7 @@ function CreateHTML (string, tag, attribute, value) {
 /** object header **/
 
 
-const VERSION = "Zephyr v0.1.7 dev";
+const VERSION = "Zephyr v0.1.8 dev";
 
 
 /* zephyr.noConflict(): celestra object */
@@ -2998,8 +3084,8 @@ const zephyr = {
   IteratorStep,
   IteratorStepValue,
   IteratorClose,
-  /* IfAbruptCloseIterator, */
-  /* AsyncIteratorClose, */
+  IfAbruptCloseIterator,
+  AsyncIteratorClose,
   CreateIteratorResultObject,
   CreateListIteratorRecord,
   IteratorToList,
