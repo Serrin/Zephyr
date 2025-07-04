@@ -1,6 +1,6 @@
 /**
  * @name Zephyr
- * @version 0.1.8 dev
+ * @version 1.0.0 dev
  * @see https://github.com/Serrin/
  * @license MIT https://opensource.org/licenses/MIT
  */
@@ -633,7 +633,14 @@ https://262.ecma-international.org/#sec-samevaluenonnumber
 https://tc39.es/ecma262/#sec-samevaluenonnumber
 7.2.11 SameValueNonNumber ( x, y )
 */
-const SameValueNonNumber = (x, y) => (x === y);
+function SameValueNonNumber (x, y) {
+  if (typeof x === "number" || typeof y === "number") {
+    throw new TypeError(
+      "SameValueNonNumber(); TypeError: x and y both have to be non number"
+    );
+  }
+  return (x === y);
+}
 
 
 /*
@@ -2968,7 +2975,7 @@ function CreateHTML (string, tag, attribute, value) {
 /** object header **/
 
 
-const VERSION = "Zephyr v0.1.8 dev";
+const VERSION = "Zephyr v1.0.0 dev";
 
 
 /* zephyr.noConflict(): celestra object */

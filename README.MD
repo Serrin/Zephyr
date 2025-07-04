@@ -5,9 +5,9 @@
 
 __Collection of the ECMAScript abstract methods as standalone Javascript functions and a library with zero dependencies.__
 
-Latest version: 0.1.8
+Latest version: 1.0.0
 
-Date: 2025-06-22T16:25:04.436Z
+Date: 2025-07-04T17:52:37.319Z
 
 __Tested on these browsers:__
 
@@ -30,7 +30,7 @@ The functions are available in the `zephyr` and/or `ES` object.
 
 
 Version       | Changes
---------------|----------------------
+--------------|-------------------------------------------
 0.0.1 - 0.0.9 | fixes and new functions
 0.1.0         | added the min file, first public version
 0.1.1         | added the esm file
