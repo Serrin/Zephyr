@@ -5,9 +5,9 @@
 
 __Collection of the ECMAScript abstract methods as standalone Javascript functions and a library with zero dependencies.__
 
-Latest version: 1.0.0
+Latest version: 1.0.1
 
-Date: 2025-07-04T17:52:37.319Z
+Date: 2025-07-14T18:49:58.592Z
 
 __Tested on these browsers:__
 
@@ -24,18 +24,6 @@ __Tested on these browsers:__
 - Android Edge
 
 The functions are available in the `zephyr` and/or `ES` object.
-
-
-### Zephyr beta versions
-
-
-Version       | Changes
---------------|-------------------------------------------
-0.0.1 - 0.0.9 | fixes and new functions
-0.1.0         | added the min file, first public version
-0.1.1         | added the esm file
-0.1.2         | added the documentation
-0.1.3 - 0.1.8 | fixes and new functions
 
 
 ### Editions
@@ -55,7 +43,7 @@ DEV and MIN editions: If the `ES` global variable is used before the loading of 
 version|page link
 -------|--------
 Stable|__https://github.com/Serrin/Zephyr__
-Beta|__https://github.com/Serrin/Zephyr__
+Beta|__https://github.com/Serrin/Zephyr-beta__
 
 
 ### How to import the ESM edition

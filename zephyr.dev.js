@@ -1,6 +1,6 @@
 /**
  * @name Zephyr
- * @version 1.0.0 dev
+ * @version 1.0.1 dev
  * @see https://github.com/Serrin/
  * @license MIT https://opensource.org/licenses/MIT
  */
@@ -2140,7 +2140,9 @@ function TypedArrayByteLength (taRecord) {
     if (O instanceof Uint32Array) { return 4; }
     if (O instanceof BigInt64Array) { return 8; }
     if (O instanceof BigUint64Array) { return 8; }
-    if (O instanceof Float16Array) { return 2; }
+    if ("Float16Array" in window) {
+      if (O instanceof Float16Array) { return 2; }
+    }
     if (O instanceof Float32Array) { return 4; }
     if (O instanceof Float64Array) { return 8; }
   }
@@ -2620,7 +2622,6 @@ const ValidateTypedArray = (O, order) =>(
 );
 
 
-
 /*
 https://262.ecma-international.org/#sec-typedarrayelementsize
 23.2.4.5 TypedArrayElementSize ( O )
@@ -2638,7 +2639,9 @@ function TypedArrayElementSize (O) {
   if (O instanceof Uint32Array) { return 4; }
   if (O instanceof BigInt64Array) { return 8; }
   if (O instanceof BigUint64Array) { return 8; }
-  if (O instanceof Float16Array) { return 2; }
+  if ("Float16Array" in window) {
+    if (O instanceof Float16Array) { return 2; }
+  }
   if (O instanceof Float32Array) { return 4; }
   if (O instanceof Float64Array) { return 8; }
 }
@@ -2661,7 +2664,9 @@ function TypedArrayElementType (O) {
   if (O instanceof Uint32Array) { return "UINT32"; }
   if (O instanceof BigInt64Array) { return "BIGINT64"; }
   if (O instanceof BigUint64Array) { return "BIGUINT64"; }
-  if (O instanceof Float16Array) { return "FLOAT16"; }
+  if ("Float16Array" in window) {
+    if (O instanceof Float16Array) { return "FLOAT16"; }
+  }
   if (O instanceof Float32Array) { return "FLOAT32"; }
   if (O instanceof Float64Array) { return "FLOAT64"; }
 }
@@ -2975,7 +2980,7 @@ function CreateHTML (string, tag, attribute, value) {
 /** object header **/
 
 
-const VERSION = "Zephyr v1.0.0 dev";
+const VERSION = "Zephyr v1.0.1 dev";
 
 
 /* zephyr.noConflict(): celestra object */
