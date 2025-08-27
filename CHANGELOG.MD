@@ -2,6 +2,11 @@
 # Zephyr version history
 
 
+## Zephyr v1.0.2
+
+- Fix the `ToString();`
+
+
 ## Zephyr v1.0.1
 
 - Add a new file: __CHANGELOG.MD__ 

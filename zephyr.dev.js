@@ -1,6 +1,6 @@
 /**
  * @name Zephyr
- * @version 1.0.1 dev
+ * @version 1.0.2 dev
  * @see https://github.com/Serrin/
  * @license MIT https://opensource.org/licenses/MIT
  */
@@ -439,7 +439,8 @@ https://262.ecma-international.org/#sec-tostring
 https://tc39.es/ecma262/#sec-tostring
 7.1.17 ToString ( argument )
 */
-const ToString = (v) => String(v);
+const ToString = (v) => v.toString 
+  ? v.toString() : Object.prototype.toString.call(v);
 
 
 /*
@@ -2980,7 +2981,7 @@ function CreateHTML (string, tag, attribute, value) {
 /** object header **/
 
 
-const VERSION = "Zephyr v1.0.1 dev";
+const VERSION = "Zephyr v1.0.2 dev";
 
 
 /* zephyr.noConflict(): celestra object */
